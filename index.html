@@ -3,36 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adwaith JS - Portfolio</title>
+    <title>Adwaith JS - Full Stack Developer</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="logo"><a href="#home">AJ</a></div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="hamburger"><span></span><span></span><span></span></div>
-        </div>
-    </nav>
+    <!-- Header/Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <div class="logo">
+                        <h1>AJ</h1>
+                    </div>
+                    <ul class="nav-menu">
+                        <li><a href="#home">HOME</a></li>
+                        <li><a href="#about">ABOUT</a></li>
+                        <li><a href="#skills">SKILLS</a></li>
+                        <li><a href="#projects">PROJECTS</a></li>
+                        <li><a href="#contact">CONTACT</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Adwaith JS</h1>
-                <p class="subtitle">Full Stack Developer | Data Science Enthusiast</p>
-                <p class="description">Enthusiastic CSE student passionate about building innovative solutions with technology. Specialized in Data Science, Machine Learning, and Web Development.</p>
-                <div class="cta-buttons">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                <h1 class="hero-title">Hi, I'm Adwaith</h1>
+                <p class="hero-subtitle">Full Stack Developer | Data Science Enthusiast | ML Passionate</p>
+                <p class="hero-description">Building innovative solutions with modern web technologies and AI</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Projects</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
                 </div>
             </div>
         </div>
@@ -41,27 +46,78 @@
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="about-card">
                     <h3>Education</h3>
                     <div class="education-item">
                         <h4>B.Tech in Computer Science & Engineering</h4>
-                        <p class="subtitle">Amrita Vishwa Vidyapeetham, Amritapuri</p>
-                        <p class="date">2021 - Present</p>
+                        <p class="institution">Amrita Vishwa Vidyapeetham, Amritapuri</p>
+                        <p class="year">2021 - Present</p>
                     </div>
                     <div class="education-item">
-                        <h4>Higher Secondary School</h4>
-                        <p class="subtitle">SMHSS Patharam, Kerala</p>
-                        <p class="date">Grade: Above 90%</p>
+                        <h4>HSC</h4>
+                        <p class="institution">SMHSS Patharam, Kerala</p>
+                        <p class="year">Scored 90%+</p>
                     </div>
                 </div>
-                <div class="about-text">
-                    <h3>Contact Information</h3>
-                    <div class="contact-info">
+                <div class="about-card">
+                    <h3>Contact Info</h3>
+                    <div class="contact-details">
                         <p><strong>Email:</strong> <a href="mailto:adwaithjs2003@outlook.com">adwaithjs2003@outlook.com</a></p>
-                        <p><strong>Phone:</strong> <a href="tel:+919140083463">+91 91400 83463</a></p>
-                        <p><strong>Location:</strong> Kollam, Kerala, India</p>
+                        <p><strong>Phone:</strong> <a href="tel:+919140083463">+91 9140083463</a></p>
+                        <p><strong>Location:</strong> Kollam, Kerala</p>
+                    </div>
+                    <h4 style="margin-top: 20px;">Interests</h4>
+                    <p>ML • Data Science • Web Dev • Open Source</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-box">
+                    <h4>Programming Languages</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">C</span>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <h4>Web Development</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Express</span>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <h4>Data Science & ML</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">Scikit-learn</span>
+                        <span class="skill-tag">Pandas</span>
+                        <span class="skill-tag">NumPy</span>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <h4>Databases & Tools</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Linux</span>
                     </div>
                 </div>
             </div>
@@ -71,81 +127,47 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
-            <h2>Featured Projects</h2>
+            <h2 class="section-title">Featured Projects</h2>
             <div class="projects-grid">
                 <div class="project-card">
-                    <h3>Election Management System</h3>
-                    <p>Comprehensive electoral system using Java and DBMS. Features voter management, ballot processing, and results tabulation.</p>
+                    <div class="project-header">
+                        <h3>Election Management System</h3>
+                        <span class="project-date">2023</span>
+                    </div>
+                    <p class="project-description">A comprehensive electoral system using Java and DBMS. Features voter management, secure authentication, and results tabulation.</p>
                     <div class="project-tech">
-                        <span>Java</span><span>MySQL</span><span>PostgreSQL</span><span>JDBC</span>
+                        <span>Java</span>
+                        <span>MySQL</span>
+                        <span>PostgreSQL</span>
+                        <span>JDBC</span>
                     </div>
                 </div>
                 <div class="project-card">
-                    <h3>Online Shopping Website</h3>
-                    <p>Full-featured e-commerce platform with product catalog, shopping cart, and payment integration.</p>
+                    <div class="project-header">
+                        <h3>Online E-Commerce Platform</h3>
+                        <span class="project-date">2023</span>
+                    </div>
+                    <p class="project-description">Full-featured shopping platform with product catalog, cart system, and payment integration. Built with modern web technologies.</p>
                     <div class="project-tech">
-                        <span>HTML/CSS</span><span>JavaScript</span><span>Backend</span>
+                        <span>HTML5</span>
+                        <span>CSS3</span>
+                        <span>JavaScript</span>
+                        <span>Backend</span>
                     </div>
                 </div>
                 <div class="project-card">
-                    <h3>Drone Learning Project</h3>
-                    <p>Hands-on drone mechanics and control systems project integrating hardware and software components.</p>
+                    <div class="project-header">
+                        <h3>Drone Control System</h3>
+                        <span class="project-date">2023</span>
+                    </div>
+                    <p class="project-description">Hardware-software integration project involving drone mechanics, control algorithms, and IoT implementation.</p>
                     <div class="project-tech">
-                        <span>Hardware</span><span>IoT</span><span>Python</span>
+                        <span>Python</span>
+                        <span>IoT</span>
+                        <span>Hardware</span>
+                        <span>Embedded</span>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2>Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Languages</h3>
-                    <div class="skill-tags">
-                        <span>Python</span><span>JavaScript</span><span>Java</span><span>SQL</span><span>C</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Web & Backend</h3>
-                    <div class="skill-tags">
-                        <span>HTML5</span><span>CSS3</span><span>Node.js</span><span>React</span><span>Express</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Data Science & ML</h3>
-                    <div class="skill-tags">
-                        <span>Machine Learning</span><span>TensorFlow</span><span>Scikit-learn</span><span>Pandas</span><span>NumPy</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Databases</h3>
-                    <div class="skill-tags">
-                        <span>MySQL</span><span>PostgreSQL</span><span>MongoDB</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Tools</h3>
-                    <div class="skill-tags">
-                        <span>Git</span><span>Google Colab</span><span>Jupyter</span><span>Linux</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Hobbies Section -->
-    <section class="hobbies">
-        <div class="container">
-            <h2>Hobbies & Interests</h2>
-            <div class="hobbies-grid">
-                <div class="hobby-item"><i class="fas fa-violin"></i><p>Violin</p></div>
-                <div class="hobby-item"><i class="fas fa-microphone"></i><p>Singing</p></div>
-                <div class="hobby-item"><i class="fas fa-camera"></i><p>Photography</p></div>
-                <div class="hobby-item"><i class="fas fa-music"></i><p>Music</p></div>
             </div>
         </div>
     </section>
@@ -153,23 +175,28 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2>Get in Touch</h2>
-            <div class="contact-content">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="contact-wrapper">
                 <div class="contact-info">
-                    <h3>Contact Me</h3>
-                    <div class="info-item"><i class="fas fa-envelope"></i>
-                        <div><h4>Email</h4><a href="mailto:adwaithjs2003@outlook.com">adwaithjs2003@outlook.com</a></div>
-                    </div>
-                    <div class="info-item"><i class="fas fa-phone"></i>
-                        <div><h4>Phone</h4><a href="tel:+919140083463">+91 91400 83463</a></div>
-                    </div>
+                    <h3>Get in Touch</h3>
+                    <p>I'm always open to new opportunities and collaborations.</p>
+                    <a href="mailto:adwaithjs2003@outlook.com" class="btn btn-primary">Send an Email</a>
                 </div>
                 <div class="social-links">
-                    <h3>Connect With Me</h3>
+                    <h3>Follow Me</h3>
                     <div class="social-icons">
-                        <a href="https://www.linkedin.com/in/adwaith-j-s-90231b224/" target="_blank" class="social-btn linkedin" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://www.instagram.com/dj_abdhu/" target="_blank" class="social-btn instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.pexels.com/@adwaith-j-s-282192263/" target="_blank" class="social-btn pexels" title="Pexels"><i class="fas fa-camera"></i></a>
+                        <a href="https://www.linkedin.com/in/adwaith-j-s-90231b224/" target="_blank" class="social-icon linkedin" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.instagram.com/dj_abdhu/" target="_blank" class="social-icon instagram" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.pexels.com/@adwaith-j-s-282192263/" target="_blank" class="social-icon pexels" title="Pexels">
+                            <i class="fas fa-camera"></i>
+                        </a>
+                        <a href="https://github.com/Itsaddu" target="_blank" class="social-icon github" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
                     </div>
                 </div>
             </div>
