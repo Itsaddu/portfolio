@@ -9,15 +9,37 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Mobile menu toggle
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
-if (hamburger) {
-  hamburger.addEventListener('click', () => {
-    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-  });
+// Mobile Sidebar Menu Toggle
+const menuToggle = document.getElementById('menuToggle');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+
+if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+    });
 }
 
+// Close sidebar when clicking overlay
+if (overlay) {
+    overlay.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+}
+
+// Close sidebar when clicking a link
+const sidebarLinks = document.querySelectorAll('.sidebar a');
+sidebarLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+});
 // Add animation on scroll
 const observerOptions = {threshold: 0.1};
 const observer = new IntersectionObserver(entries => {
