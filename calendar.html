@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar 2026 - Adwaith JS</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .calendar-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 10px;
+        }
+        
+        .calendar-header h1 {
+            color: #fff;
+            margin: 0;
+            font-size: 2em;
+        }
+        
+        .home-btn {
+            background: #00d4ff;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #00a8cc;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+        
+        .months-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+        
+        .month-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .month-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+        }
+        
+        .month-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .month-name {
+            padding: 15px;
+            text-align: center;
+            background: #f0f0f0;
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1em;
+            border-top: 3px solid #00d4ff;
+        }
+        
+        @media (max-width: 768px) {
+            .calendar-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .calendar-header h1 {
+                font-size: 1.5em;
+            }
+            
+            .months-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <h1>Calendar 2026</h1>
+            <a href="index.html" class="home-btn">🏠 Home</a>
+        </div>
+        
+        <div class="months-grid">
+            <!-- January -->
+            <div class="month-card">
+                <img src="Calender_png_2026/malayalam-calendar-2026-january.png" alt="January 2026">
+                <div class="month-name">January</div>
+            </div>
+            
+            <!-- February -->
+            <div class="month-card">
+                <img src="Calender_png_2026/malayalam-calendar-2026-february.png" alt="February 2026">
+                <div class="month-name">February</div>
+            </div>
+            
+            <!-- March -->
+            <div class="month-card">
+                <img src="Calender_png_2026/malayalam-calendar-2026-march.png" alt="March 2026">
+                <div class="month-name">March</div>
+            </div>
+            
+            <!-- April -->
+            <div class="month-card">
+                <img src="Calender_png_2026/malayalam-calendar-2026-april.png" alt="April 2026">
+                <div class="month-name">April</div>
+            </div>
+            
+            <!-- May -->
+            <div class="month-card">
+                <img src="Calender_png_2026/malayalam-calendar-2026-may.png" alt="May 2026">
+                <div class="month-name">May</div>
+            </div>
+            
+            <!-- June -->
+            <div class="month-card">
+                <img src="Calender_png_2026/malayalam-calendar-2026-june.png" alt="June 2026">
+                <div class="month-name">June</div>
+            </div>
+            
+            <!-- July -->
+            <div class="month-card">
+                <img src="Calender_png_2026/malayalam-calendar-2026-july.png" alt="July 2026">
+                <div class="month-name">July</div>
+            </div>
+            
+            <!-- August -->
+            <div class="month-card">
+                <img src="Calender_png_2026/malayalam-calendar-2026-august.png" alt="August 2026">
+                <div class="month-name">August</div>
+            </div>
+            
+            <!-- September -->
+            <div class="month-card">
+                <img src="Calender_png_2026/malayalam-calendar-2026-september.png" alt="September 2026">
+                <div class="month-name">September</div>
+            </div>
+            
+            <!-- October -->
+            <div class="month-card">
+                <img src="Calender_png_2026/malayalam-calendar-2026-october.png" alt="October 2026">
+                <div class="month-name">October</div>
+            </div>
+            
+            <!-- November -->
+            <div class="month-card">
+                <img src="Calender_png_2026/malayalam-calendar-2026-november.png" alt="November 2026">
+                <div class="month-name">November</div>
+            </div>
+            
+            <!-- December -->
+            <div class="month-card">
+                <img src="Calender_png_2026/malayalam-calendar-2026-december.png" alt="December 2026">
+                <div class="month-name">December</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
