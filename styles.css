@@ -378,3 +378,13 @@ section { padding: 80px 0; }
   border-radius: 4px;
 }
 
+/* Auto-hide mobile menu button */
+.menu-toggle {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.menu-toggle.hide {
+  opacity: 0;
+  transform: translateY(-15px);
+  pointer-events: none;
+}
