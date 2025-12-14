@@ -1,285 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Adwaith JS - Full Stack Developer, Data Science Enthusiast & ML Passionate">
-    <meta name="theme-color" content="#ffffff">
-    <title>Adwaith JS - Full Stack Developer & Data Scientist</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Adwaith JS - Full Stack Developer, Data Science Enthusiast & ML Passionate" />
+  <meta name="theme-color" content="#000000" />
+  <title>Adwaith JS - Full Stack Developer</title>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
+
 <body>
-    
-<!-- Mobile Menu Toggle -->
+
+<!-- ================= MOBILE SIDEBAR SYSTEM (ONE TIME ONLY) ================= -->
+
 <button class="menu-toggle" id="menuToggle" aria-label="Open menu">⋮</button>
 
-<!-- Overlay -->
 <div class="overlay" id="overlay"></div>
 
-<!-- Sidebar -->
-<aside class="sidebar" id="sidebar">
+<aside class="sidebar" id="sidebar" aria-label="Mobile navigation">
   <ul class="nav-menu">
     <li><a href="index.html">HOME</a></li>
     <li><a href="about.html">ABOUT</a></li>
     <li><a href="skills.html">SKILLS</a></li>
     <li><a href="projects.html">PROJECTS</a></li>
-    <li><a href="index.html#contact">CONTACT</a></li>
+    <li><a href="#contact">CONTACT</a></li>
     <li><a href="calendar.html">CALENDAR</a></li>
   </ul>
 </aside>
 
-    <!-- Header with Navigation -->
-    <header class="header" role="banner">
-        <nav class="navbar" role="navigation" aria-label="Main navigation">
-            <div class="container">
-                <div class="nav-wrapper">
-                    <div class="logo">
-                        <h1><a href="#home">AJS</a></h1>
-                    </div>
-                    <!-- Desktop Navigation -->
-                    <ul class="nav-menu desktop-nav">
-                        <li><a href="#home" class="nav-link">HOME</a></li>
-                        <li><a href="#about" class="nav-link">ABOUT</a></li>
-                        <li><a href="#skills" class="nav-link">SKILLS</a></li>
-                        <li><a href="#projects" class="nav-link">PROJECTS</a></li>
-                        <li><a href="#repositories" class="nav-link">REPOS</a></li>
-                        <li><a href="#contact" class="nav-link">CONTACT</a></li>
-                    </ul>
-                    <!-- Mobile Menu Button -->
-                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">⋮</button>
-                </div>
-            </div>
-        </nav>
-    </header>
+<!-- ================= HEADER (DESKTOP NAV ONLY) ================= -->
 
-    <!-- Mobile Sidebar Menu -->
-    <div class="overlay" id="overlay" role="presentation"></div>
-    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Mobile navigation">
-        <ul class="sidebar-nav">
-            <li><a href="#home" class="sidebar-link">HOME</a></li>
-            <li><a href="#about" class="sidebar-link">ABOUT</a></li>
-            <li><a href="#skills" class="sidebar-link">SKILLS</a></li>
-            <li><a href="#projects" class="sidebar-link">PROJECTS</a></li>
-            <li><a href="#repositories" class="sidebar-link">REPOS</a></li>
-            <li><a href="#contact" class="sidebar-link">CONTACT</a></li>
+<header class="header">
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="logo">
+          <h1><a href="index.html">AJS</a></h1>
+        </div>
+
+        <ul class="nav-menu desktop-nav">
+          <li><a href="#home">HOME</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="skills.html">SKILLS</a></li>
+          <li><a href="projects.html">PROJECTS</a></li>
+          <li><a href="#repositories">REPOS</a></li>
+          <li><a href="#contact">CONTACT</a></li>
         </ul>
-    </aside>
+      </div>
+    </div>
+  </nav>
+</header>
 
-    <!-- Main Content -->
-    <main id="home">
-        <!-- Hero Section -->
-        <section class="hero" aria-labelledby="hero-title">
-            <div class="container">
-                <div class="hero-content">
-                    <h1 id="hero-title" class="hero-title">Hi, I'm Adwaith</h1>
-                    <p class="hero-subtitle">Full Stack Developer | Data Science Enthusiast | ML Passionate</p>
-                    <p class="hero-description">Building innovative solutions with modern web technologies and AI</p>
-                    <div class="hero-buttons">
-                        <a href="#projects" class="btn btn-primary">View My Projects</a>
-                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- ================= MAIN CONTENT ================= -->
 
-        <!-- About Section -->
-        <section id="about" class="about" aria-labelledby="about-title">
-            <div class="container">
-                <h2 id="about-title" class="section-title">About Me</h2>
-                <div class="about-grid">
-                    <div class="about-card">
-                        <h3>Education</h3>
-                        <div class="education-item">
-                            <h4>B.Tech in Computer Science & Engineering</h4>
-                            <p class="institution">Amrita Vishwa Vidyapeetham, Amritapuri</p>
-                            <p class="year">2021 - Present</p>
-                        </div>
-                        <div class="education-item">
-                            <h4>Higher Secondary Certificate (HSC)</h4>
-                            <p class="institution">SMHSS Patharam, Kerala</p>
-                            <p class="year">Scored 90%+</p>
-                        </div>
-                    </div>
-                    <div class="about-card">
-                        <h3>Contact & Interests</h3>
-                        <div class="contact-details">
-                            <p><strong>Email:</strong> <a href="mailto:adwaithjs2003@outlook.com">adwaithjs2003@outlook.com</a></p>
-                            <p><strong>Phone:</strong> <a href="tel:+919140083463">+91 9140083463</a></p>
-                            <p><strong>Location:</strong> Kollam, Kerala</p>
-                        </div>
-                        <h4 style="margin-top: 25px;">Interests</h4>
-                        <p>Machine Learning • Data Science • Web Development • Open Source</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+<main id="home">
 
-        <!-- Skills Section -->
-        <section id="skills" class="skills" aria-labelledby="skills-title">
-            <div class="container">
-                <h2 id="skills-title" class="section-title">Technical Skills</h2>
-                <div class="skills-grid">
-                    <div class="skill-box">
-                        <h3>Programming Languages</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">Java</span>
-                            <span class="skill-tag">SQL</span>
-                            <span class="skill-tag">C</span>
-                        </div>
-                    </div>
-                    <div class="skill-box">
-                        <h3>Web Development</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag">HTML5</span>
-                            <span class="skill-tag">CSS3</span>
-                            <span class="skill-tag">React</span>
-                            <span class="skill-tag">Node.js</span>
-                            <span class="skill-tag">Express</span>
-                        </div>
-                    </div>
-                    <div class="skill-box">
-                        <h3>Data Science & ML</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag">Machine Learning</span>
-                            <span class="skill-tag">TensorFlow</span>
-                            <span class="skill-tag">Scikit-learn</span>
-                            <span class="skill-tag">Pandas</span>
-                            <span class="skill-tag">NumPy</span>
-                        </div>
-                    </div>
-                    <div class="skill-box">
-                        <h3>Databases & Tools</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag">MySQL</span>
-                            <span class="skill-tag">PostgreSQL</span>
-                            <span class="skill-tag">Git</span>
-                            <span class="skill-tag">Docker</span>
-                            <span class="skill-tag">Linux</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-content">
+      <h1 class="hero-title">Hi, I'm Adwaith</h1>
+      <p class="hero-subtitle">Full Stack Developer | Data Science Enthusiast | ML Passionate</p>
+      <p class="hero-description">
+        Building innovative solutions with modern web technologies and AI
+      </p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">View My Projects</a>
+        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+      </div>
+    </div>
+  </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="projects" aria-labelledby="projects-title">
-            <div class="container">
-                <h2 id="projects-title" class="section-title">Featured Projects</h2>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <div class="project-header">
-                            <h3>Election Management System</h3>
-                            <span class="project-date">2023</span>
-                        </div>
-                        <p class="project-description">A comprehensive electoral system using Java and DBMS. Features voter management, secure authentication, and results tabulation.</p>
-                        <div class="project-tech">
-                            <span>Java</span>
-                            <span>MySQL</span>
-                            <span>PostgreSQL</span>
-                            <span>JDBC</span>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-header">
-                            <h3>Online E-Commerce Platform</h3>
-                            <span class="project-date">2023</span>
-                        </div>
-                        <p class="project-description">Full-featured shopping platform with product catalog, cart system, and payment integration. Built with modern web technologies.</p>
-                        <div class="project-tech">
-                            <span>HTML5</span>
-                            <span>CSS3</span>
-                            <span>JavaScript</span>
-                            <span>Backend</span>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-header">
-                            <h3>Drone Control System</h3>
-                            <span class="project-date">2023</span>
-                        </div>
-                        <p class="project-description">Hardware-software integration project involving drone mechanics, control algorithms, and IoT implementation.</p>
-                        <div class="project-tech">
-                            <span>Python</span>
-                            <span>IoT</span>
-                            <span>Hardware</span>
-                            <span>Embedded</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
 
-        <!-- GitHub Repositories Section -->
-        <section id="repositories" class="repositories" aria-labelledby="repos-title">
-            <div class="container">
-                <h2 id="repos-title" class="section-title">GitHub Repositories</h2>
-                <div class="repos-grid">
-                    <div class="repo-card">
-                        <div class="repo-header">
-                            <h3><a href="https://github.com/Itsaddu/Online-Jflap-thingi" target="_blank" rel="noopener noreferrer">Online-Jflap-thingi</a></h3>
-                            <span class="repo-language">TypeScript</span>
-                        </div>
-                        <p class="repo-description">An interactive web-based tool for designing and simulating finite automata with visual interface.</p>
-                        <div class="repo-stats">
-                            <span><i class="fas fa-star"></i> Stars</span>
-                            <span><i class="fas fa-code-branch"></i> Forks</span>
-                        </div>
-                    </div>
-                    <div class="repo-card">
-                        <div class="repo-header">
-                            <h3><a href="https://github.com/Itsaddu/Universal-Popup-Browser" target="_blank" rel="noopener noreferrer">Universal-Popup-Browser</a></h3>
-                            <span class="repo-language">JavaScript</span>
-                        </div>
-                        <p class="repo-description">Open small popup windows with any URL and manage saved URLs efficiently with a clean interface.</p>
-                        <div class="repo-stats">
-                            <span><i class="fas fa-star"></i> Stars</span>
-                            <span><i class="fas fa-code-branch"></i> Forks</span>
-                        </div>
-                    </div>
-                    <div class="repo-card">
-                        <div class="repo-header">
-                            <h3><a href="https://github.com/Itsaddu/Calculator" target="_blank" rel="noopener noreferrer">Calculator</a></h3>
-                            <span class="repo-language">Java</span>
-                        </div>
-                        <p class="repo-description">A feature-rich calculator application built with Java featuring multiple operations and clean UI.</p>
-                        <div class="repo-stats">
-                            <span><i class="fas fa-star"></i> Stars</span>
-                            <span><i class="fas fa-code-branch"></i> Forks</span>
-                        </div>
-                    </div>
-                    <div class="repo-card">
-                        <div class="repo-header">
-                            <h3><a href="https://github.com/Itsaddu/CalendarDiaryApp" target="_blank" rel="noopener noreferrer">CalendarDiaryApp</a></h3>
-                            <span class="repo-language">Java</span>
-                        </div>
-                        <p class="repo-description">A calendar and diary application for organizing personal schedules, notes, and important events.</p>
-                        <div class="repo-stats">
-                            <span><i class="fas fa-star"></i> Stars</span>
-                            <span><i class="fas fa-code-branch"></i> Forks</span>
-                        </div>
-                    </div>
-                    <div class="repo-card">
-                        <div class="repo-header">
-                            <h3><a href="https://github.com/Itsaddu/ZoopRides1" target="_blank" rel="noopener noreferrer">ZoopRides</a></h3>
-                            <span class="repo-language">JavaScript</span>
-                        </div>
-                        <p class="repo-description">A web-based bike rental platform where users can rent bikes by time or list their own bikes for rent.</p>
-                        <div class="repo-stats">
-                            <span><i class="fas fa-star"></i> Stars</span>
-                            <span><i class="fas fa-code-branch"></i> Forks</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="view-more">
-                    <a href="https://github.com/Itsaddu?tab=repositories" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View All Repositories</a>
-                </div>
-            </div>
-        </section>
+      <div class="about-grid">
+        <div class="about-card">
+          <h3>Education</h3>
+          <div class="education-item">
+            <h4>B.Tech in Computer Science & Engineering</h4>
+            <p class="institution">Amrita Vishwa Vidyapeetham, Amritapuri</p>
+            <p class="year">2021 – Present</p>
+          </div>
+          <div class="education-item">
+            <h4>HSC</h4>
+            <p class="institution">SMHSS Patharam, Kerala</p>
+            <p class="year">90%+</p>
+          </div>
+        </div>
 
-        <!-- Contact Section -->
-        <section id="contact" class="contact" aria-labelledby="contact-title">
-            <div class="container">
-                <h2 id="contact-title" class="section-title">Let's Connect</h2>
+        <div class="about-card">
+          <h3>Contact & Interests</h3>
+          <p><strong>Email:</strong> <a href="mailto:adwaithjs2003@outlook.com">adwaithjs2003@outlook.com</a></p>
+          <p><strong>Phone:</strong> <a href="tel:+919140083463">+91 9140083463</a></p>
+          <p><strong>Location:</strong> Kollam, Kerala</p>
+
+          <h4 style="margin-top:20px;">Interests</h4>
+          <p>ML • Data Science • Web Development • Open Source</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="skills">
+    <div class="container">
+      <h2 class="section-title">Technical Skills</h2>
+
+      <div class="skills-grid">
+        <div class="skill-box">
+          <h4>Programming</h4>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">C</span>
+        </div>
+
+        <div class="skill-box">
+          <h4>Web</h4>
+          <span class="skill-tag">HTML</span>
+          <span class="skill-tag">CSS</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">Express</span>
+        </div>
+
+        <div class="skill-box">
+          <h4>ML & Data</h4>
+          <span class="skill-tag">Machine Learning</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">Scikit-learn</span>
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">NumPy</span>
+        </div>
+
+        <div class="skill-box">
+          <h4>Tools</h4>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Linux</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">PostgreSQL</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="projects">
+    <div class="container">
+      <h2 class="section-title">Projects</h2>
+
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>Election Management System</h3>
+          <p>Java-based system with secure authentication and DBMS integration.</p>
+        </div>
+
+        <div class="project-card">
+          <h3>E-Commerce Platform</h3>
+          <p>Web-based shopping platform with cart and payment workflow.</p>
+        </div>
+
+        <div class="project-card">
+          <h3>Drone Control System</h3>
+          <p>Hardware–software project integrating IoT and control algorithms.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REPOSITORIES -->
+  <section id="repositories" class="repositories">
+    <div class="container">
+      <h2 class="section-title">GitHub Repositories</h2>
+
+      <div class="repos-grid">
+        <a class="repo-card" href="https://github.com/Itsaddu" target="_blank">
+          <h3>View My GitHub</h3>
+          <p>Open-source projects and experiments</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2 class="section-title">Let’s Connect</h2>
+
+      <a href="mailto:adwaithjs2003@outlook.com" class="btn btn-primary">
+        Send Email
+      </a>
+
+      <div class="social-icons">
+        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/Itsaddu" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2025 Adwaith JS. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
