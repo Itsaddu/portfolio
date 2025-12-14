@@ -6,180 +6,185 @@
     <title>Calendar 2026 - Adwaith JS</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        .calendar-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f0f1e; color: #333; }
         
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border-radius: 10px;
-        }
+        .calendar-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         
-        .calendar-header h1 {
-            color: #fff;
-            margin: 0;
-            font-size: 2em;
-        }
+        .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-radius: 10px; }
+        .calendar-header h1 { color: #fff; font-size: 2em; }
+        .home-btn { background: #00d4ff; color: #000; border: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-block; }
+        .home-btn:hover { background: #00a8cc; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4); }
         
-        .home-btn {
-            background: #00d4ff;
-            color: #000;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            font-size: 1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
+        .months-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 20px 0; }
         
-        .home-btn:hover {
-            background: #00a8cc;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
-        }
+        .month-card { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); transition: all 0.3s ease; cursor: pointer; }
+        .month-card:hover { transform: translateY(-10px); box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3); }
+        .month-card img { width: 100%; height: auto; display: block; transition: transform 0.3s; }
+        .month-card:hover img { transform: scale(1.05); }
+        .month-name { padding: 15px; text-align: center; background: #f0f0f0; font-weight: bold; color: #333; font-size: 1.1em; border-top: 3px solid #00d4ff; }
         
-        .months-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px 0;
-        }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); animation: fadeIn 0.3s; overflow-y: auto; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        .month-card {
-            background: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+        .modal-content { background-color: #fefefe; margin: 2% auto; padding: 20px; border-radius: 15px; width: 90%; max-width: 900px; max-height: 85vh; overflow-y: auto; position: relative; animation: slideIn 0.4s; }
+        @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         
-        .month-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
-        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #00d4ff; padding-bottom: 15px; }
+        .modal-header h2 { color: #1a1a2e; font-size: 1.8em; }
+        .close-btn { font-size: 32px; font-weight: bold; color: #aaa; cursor: pointer; background: none; border: none; padding: 0; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s; }
+        .close-btn:hover { color: #000; background: #f0f0f0; }
         
-        .month-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+        .modal-image { width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px; max-height: 60vh; object-fit: contain; }
         
-        .month-name {
-            padding: 15px;
-            text-align: center;
-            background: #f0f0f0;
-            font-weight: bold;
-            color: #333;
-            font-size: 1.1em;
-            border-top: 3px solid #00d4ff;
-        }
+        .zoom-controls { display: flex; gap: 10px; margin-bottom: 20px; align-items: center; }
+        .zoom-btn { padding: 10px 20px; background: #00d4ff; color: #000; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+        .zoom-btn:hover { background: #00a8cc; }
+        .zoom-level { font-weight: bold; color: #1a1a2e; min-width: 50px; text-align: center; }
+        
+        .navigation { display: flex; gap: 15px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+        .nav-btn { padding: 12px 25px; background: #1a1a2e; color: #00d4ff; border: 2px solid #00d4ff; border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.3s; font-size: 1em; }
+        .nav-btn:hover:not(:disabled) { background: #00d4ff; color: #1a1a2e; transform: scale(1.05); }
+        .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .month-display { text-align: center; font-weight: bold; color: #1a1a2e; font-size: 1.1em; min-width: 150px; }
+        
+        .swipe-hint { text-align: center; color: #666; margin-top: 15px; font-size: 0.9em; }
         
         @media (max-width: 768px) {
-            .calendar-header {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .calendar-header h1 {
-                font-size: 1.5em;
-            }
-            
-            .months-grid {
-                grid-template-columns: 1fr;
-            }
+            .calendar-header { flex-direction: column; gap: 15px; }
+            .calendar-header h1 { font-size: 1.5em; }
+            .months-grid { grid-template-columns: 1fr; }
+            .modal-content { width: 95%; margin: 5% auto; padding: 15px; }
+            .zoom-controls { flex-wrap: wrap; }
         }
     </style>
 </head>
 <body>
     <div class="calendar-container">
         <div class="calendar-header">
-            <h1>Calendar 2026</h1>
+            <h1>📅 Calendar 2026</h1>
             <a href="index.html" class="home-btn">🏠 Home</a>
         </div>
         
-        <div class="months-grid">
-            <!-- January -->
-            <div class="month-card">
-                <img src="Calender_png_2026/malayalam-calendar-2026-january.png" alt="January 2026">
-                <div class="month-name">January</div>
+        <div class="months-grid" id="monthsGrid"></div>
+    </div>
+    
+    <div id="calendarModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">January</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
             </div>
             
-            <!-- February -->
-            <div class="month-card">
-                <img src="Calender_png_2026/malayalam-calendar-2026-february.png" alt="February 2026">
-                <div class="month-name">February</div>
+            <div class="zoom-controls">
+                <button class="zoom-btn" onclick="zoomOut()">🔍- Zoom Out</button>
+                <span class="zoom-level" id="zoomLevel">100%</span>
+                <button class="zoom-btn" onclick="zoomIn()">🔍+ Zoom In</button>
             </div>
             
-            <!-- March -->
-            <div class="month-card">
-                <img src="Calender_png_2026/malayalam-calendar-2026-march.png" alt="March 2026">
-                <div class="month-name">March</div>
+            <img id="modalImage" class="modal-image" src="" alt="Calendar" style="transform-origin: top center; transition: transform 0.3s ease;">
+            
+            <div class="navigation">
+                <button class="nav-btn" id="prevBtn" onclick="previousMonth()">← Previous</button>
+                <span class="month-display" id="monthDisplay">January 2026</span>
+                <button class="nav-btn" id="nextBtn" onclick="nextMonth()">Next →</button>
             </div>
             
-            <!-- April -->
-            <div class="month-card">
-                <img src="Calender_png_2026/malayalam-calendar-2026-april.png" alt="April 2026">
-                <div class="month-name">April</div>
-            </div>
-            
-            <!-- May -->
-            <div class="month-card">
-                <img src="Calender_png_2026/malayalam-calendar-2026-may.png" alt="May 2026">
-                <div class="month-name">May</div>
-            </div>
-            
-            <!-- June -->
-            <div class="month-card">
-                <img src="Calender_png_2026/malayalam-calendar-2026-june.png" alt="June 2026">
-                <div class="month-name">June</div>
-            </div>
-            
-            <!-- July -->
-            <div class="month-card">
-                <img src="Calender_png_2026/malayalam-calendar-2026-july.png" alt="July 2026">
-                <div class="month-name">July</div>
-            </div>
-            
-            <!-- August -->
-            <div class="month-card">
-                <img src="Calender_png_2026/malayalam-calendar-2026-august.png" alt="August 2026">
-                <div class="month-name">August</div>
-            </div>
-            
-            <!-- September -->
-            <div class="month-card">
-                <img src="Calender_png_2026/malayalam-calendar-2026-september.png" alt="September 2026">
-                <div class="month-name">September</div>
-            </div>
-            
-            <!-- October -->
-            <div class="month-card">
-                <img src="Calender_png_2026/malayalam-calendar-2026-october.png" alt="October 2026">
-                <div class="month-name">October</div>
-            </div>
-            
-            <!-- November -->
-            <div class="month-card">
-                <img src="Calender_png_2026/malayalam-calendar-2026-november.png" alt="November 2026">
-                <div class="month-name">November</div>
-            </div>
-            
-            <!-- December -->
-            <div class="month-card">
-                <img src="Calender_png_2026/malayalam-calendar-2026-december.png" alt="December 2026">
-                <div class="month-name">December</div>
-            </div>
+            <div class="swipe-hint">💡 Swipe left/right or use arrow keys to navigate | Press ESC to close</div>
         </div>
     </div>
+    
+    <script>
+        const months = [
+            { name: 'January', file: 'Calender_png_2026/malayalam-calendar-2026-january.png' },
+            { name: 'February', file: 'Calender_png_2026/malayalam-calendar-2026-february.png' },
+            { name: 'March', file: 'Calender_png_2026/malayalam-calendar-2026-march.png' },
+            { name: 'April', file: 'Calender_png_2026/malayalam-calendar-2026-april.png' },
+            { name: 'May', file: 'Calender_png_2026/malayalam-calendar-2026-may.png' },
+            { name: 'June', file: 'Calender_png_2026/malayalam-calendar-2026-june.png' },
+            { name: 'July', file: 'Calender_png_2026/malayalam-calendar-2026-july.png' },
+            { name: 'August', file: 'Calender_png_2026/malayalam-calendar-2026-august.png' },
+            { name: 'September', file: 'Calender_png_2026/malayalam-calendar-2026-september.png' },
+            { name: 'October', file: 'Calender_png_2026/malayalam-calendar-2026-october.png' },
+            { name: 'November', file: 'Calender_png_2026/malayalam-calendar-2026-november.png' },
+            { name: 'December', file: 'Calender_png_2026/malayalam-calendar-2026-december.png' }
+        ];
+        
+        let currentMonth = 0;
+        let currentZoom = 100;
+        let touchStartX = 0;
+        
+        function initializeGrid() {
+            const grid = document.getElementById('monthsGrid');
+            months.forEach((month, index) => {
+                const card = document.createElement('div');
+                card.className = 'month-card';
+                card.innerHTML = `<img src="${month.file}" alt="${month.name} 2026" loading="lazy"><div class="month-name">${month.name}</div>`;
+                card.addEventListener('click', () => openModal(index));
+                grid.appendChild(card);
+            });
+        }
+        
+        function openModal(index) {
+            currentMonth = index;
+            currentZoom = 100;
+            updateModal();
+            document.getElementById('calendarModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('calendarModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function updateModal() {
+            const month = months[currentMonth];
+            document.getElementById('modalTitle').textContent = month.name;
+            document.getElementById('modalImage').src = month.file;
+            document.getElementById('monthDisplay').textContent = month.name + ' 2026';
+            document.getElementById('zoomLevel').textContent = currentZoom + '%';
+            document.getElementById('modalImage').style.transform = `scale(${currentZoom / 100})`;
+            document.getElementById('prevBtn').disabled = currentMonth === 0;
+            document.getElementById('nextBtn').disabled = currentMonth === months.length - 1;
+        }
+        
+        function previousMonth() {
+            if (currentMonth > 0) { currentMonth--; currentZoom = 100; updateModal(); }
+        }
+        
+        function nextMonth() {
+            if (currentMonth < months.length - 1) { currentMonth++; currentZoom = 100; updateModal(); }
+        }
+        
+        function zoomIn() {
+            if (currentZoom < 250) { currentZoom += 25; updateModal(); }
+        }
+        
+        function zoomOut() {
+            if (currentZoom > 75) { currentZoom -= 25; updateModal(); }
+        }
+        
+        document.getElementById('calendarModal').addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
+        document.getElementById('calendarModal').addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) nextMonth();
+            if (touchEndX - touchStartX > 50) previousMonth();
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('calendarModal').style.display === 'block') {
+                if (e.key === 'ArrowLeft') previousMonth();
+                if (e.key === 'ArrowRight') nextMonth();
+                if (e.key === 'Escape') closeModal();
+            }
+        });
+        
+        document.getElementById('calendarModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('calendarModal')) closeModal();
+        });
+        
+        initializeGrid();
+    </script>
 </body>
 </html>
