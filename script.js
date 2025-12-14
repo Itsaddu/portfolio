@@ -1,61 +1,78 @@
-// Smooth scrolling for navigation links
+// ===== PORTFOLIO INTERACTION SCRIPT =====
+
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menuToggle");
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+
+  // Return early if elements don't exist
+  if (!menuToggle || !sidebar || !overlay) return;
+
+  // Open menu
+  const openMenu = () => {
+    sidebar.classList.add("active");
+    overlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+  };
+
+  // Close menu
+  const closeMenu = () => {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
+    document.body.style.overflow = "";
+  };
+
+  // Event listeners
+  menuToggle.addEventListener("click", openMenu);
+  overlay.addEventListener("click", closeMenu);
+
+  // Close menu when a link is clicked
+  sidebar.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  // Close menu on Escape key
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") closeMenu();
+  });
+});
+
+// ===== SMOOTH SCROLL BEHAVIOR =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
     const target = document.querySelector(this.getAttribute('href'));
     if (target) {
-      target.scrollIntoView({behavior: 'smooth'});
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
   });
 });
 
-// Mobile Sidebar Menu Toggle
-const menuToggle = document.getElementById('menuToggle');
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('overlay');
+// ===== SCROLL ANIMATIONS =====
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
 
-if (menuToggle) {
-    menuToggle.addEventListener('click', () => {
-        menuToggle.classList.toggle('active');
-        sidebar.classList.toggle('active');
-        overlay.classList.toggle('active');
-    });
-}
-
-// Close sidebar when clicking overlay
-if (overlay) {
-    overlay.addEventListener('click', () => {
-        menuToggle.classList.remove('active');
-        sidebar.classList.remove('active');
-        overlay.classList.remove('active');
-    });
-}
-
-// Close sidebar when clicking a link
-const sidebarLinks = document.querySelectorAll('.sidebar a');
-sidebarLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        menuToggle.classList.remove('active');
-        sidebar.classList.remove('active');
-        overlay.classList.remove('active');
-    });
-});
-// Add animation on scroll
-const observerOptions = {threshold: 0.1};
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.style.opacity = '1';
       entry.target.style.transform = 'translateY(0)';
+      observer.unobserve(entry.target);
     }
   });
 }, observerOptions);
 
-document.querySelectorAll('.project-card, .skill-category').forEach(el => {
+// Observe elements for scroll animation
+document.querySelectorAll('.project-card, .skill-box, .repo-card, .about-card').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(20px)';
   el.style.transition = 'all 0.6s ease';
   observer.observe(el);
 });
 
-console.log('Portfolio loaded successfully!');}
+console.log('✓ Portfolio script loaded successfully');
