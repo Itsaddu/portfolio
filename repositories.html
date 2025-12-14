@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="GitHub Repositories by Adwaith JS" />
+  <title>GitHub Repositories | Adwaith JS</title>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+
+<!-- ================= MOBILE SIDEBAR SYSTEM ================= -->
+
+<button class="menu-toggle" id="menuToggle" aria-label="Open menu">⋮</button>
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar" aria-label="Mobile navigation">
+  <ul class="nav-menu">
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+    <li><a href="skills.html">SKILLS</a></li>
+    <li><a href="projects.html">PROJECTS</a></li>
+    <li><a href="repositories.html" class="active">REPOSITORIES</a></li>
+    <li><a href="calendar.html">CALENDAR</a></li>
+  </ul>
+</aside>
+
+<!-- ================= HEADER (DESKTOP NAV) ================= -->
+
+<header class="header">
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="logo">
+          <h1><a href="index.html">AJS</a></h1>
+        </div>
+
+        <ul class="nav-menu desktop-nav">
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="skills.html">SKILLS</a></li>
+          <li><a href="projects.html">PROJECTS</a></li>
+          <li><a href="repositories.html" class="active">REPOSITORIES</a></li>
+          <li><a href="index.html#contact">CONTACT</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main class="repositories-page">
+
+  <section class="repositories">
+    <div class="container">
+      <h2 class="section-title">GitHub Repositories</h2>
+      <p style="text-align:center; margin-bottom:40px;">
+        A collection of my open-source and academic projects
+      </p>
+
+      <div class="repos-grid">
+
+        <!-- Repo Card -->
+        <div class="repo-card">
+          <div class="repo-header">
+            <h3>
+              <a href="https://github.com/Itsaddu/Online-Jflap-thingi" target="_blank">
+                Online-JFLAP-Thingi
+              </a>
+            </h3>
+            <span class="repo-language">TypeScript</span>
+          </div>
+          <p class="repo-description">
+            Web-based tool for designing and simulating finite automata visually.
+          </p>
+        </div>
+
+        <div class="repo-card">
+          <div class="repo-header">
+            <h3>
+              <a href="https://github.com/Itsaddu/Universal-Popup-Browser" target="_blank">
+                Universal Popup Browser
+              </a>
+            </h3>
+            <span class="repo-language">JavaScript</span>
+          </div>
+          <p class="repo-description">
+            Lightweight popup browser with URL saving and quick access.
+          </p>
+        </div>
+
+        <div class="repo-card">
+          <div class="repo-header">
+            <h3>
+              <a href="https://github.com/Itsaddu/Calculator" target="_blank">
+                Calculator
+              </a>
+            </h3>
+            <span class="repo-language">Java</span>
+          </div>
+          <p class="repo-description">
+            Simple and clean calculator application built using Java.
+          </p>
+        </div>
+
+        <div class="repo-card">
+          <div class="repo-header">
+            <h3>
+              <a href="https://github.com/Itsaddu/CalendarDiaryApp" target="_blank">
+                Calendar Diary App
+              </a>
+            </h3>
+            <span class="repo-language">Java</span>
+          </div>
+          <p class="repo-description">
+            Calendar and diary app for managing notes and schedules.
+          </p>
+        </div>
+
+        <div class="repo-card">
+          <div class="repo-header">
+            <h3>
+              <a href="https://github.com/Itsaddu/ZoopRides1" target="_blank">
+                ZoopRides
+              </a>
+            </h3>
+            <span class="repo-language">JavaScript</span>
+          </div>
+          <p class="repo-description">
+            Bike rental platform where users can rent or list bikes.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="view-more" style="margin-top:40px; text-align:center;">
+        <a href="https://github.com/Itsaddu?tab=repositories" target="_blank" class="btn btn-primary">
+          View All on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+  <p>© 2025 Adwaith JS. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
