@@ -6,118 +6,299 @@
     <title>Adwaith JS - Full Stack Developer</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root { --primary-color: #00d4ff; --dark-bg: #0f0f1e; --card-bg: #1a1a2e; --text-color: #fff; --transition: all 0.3s ease; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--dark-bg); color: var(--text-color); }
-        
-        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); position: fixed; width: 100%; top: 0; z-index: 999; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); }
-        .logo { font-size: 1.5em; font-weight: bold; color: var(--text-color); }
-        
-        .menu-toggle { background: none; border: none; font-size: 1.8em; color: var(--primary-color); cursor: pointer; transition: var(--transition); padding: 10px; border-radius: 5px; }
-        .menu-toggle:hover { background: rgba(0, 212, 255, 0.1); transform: scale(1.1); }
-        
-        .sidebar { position: fixed; right: -350px; top: 0; width: 350px; height: 100vh; background: var(--card-bg); box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5); transition: var(--transition); z-index: 998; overflow-y: auto; }
-        .sidebar.active { right: 0; }
-        
-        .sidebar-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 2px solid var(--primary-color); background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
-        .sidebar-header h2 { color: var(--text-color); font-size: 1.3em; }
-        .close-btn { background: none; border: none; font-size: 1.8em; color: var(--primary-color); cursor: pointer; padding: 5px 10px; border-radius: 5px; transition: var(--transition); }
-        .close-btn:hover { background: rgba(0, 212, 255, 0.1); }
-        
-        .nav-menu { list-style: none; padding: 20px 0; }
-        .nav-menu li { padding: 0; }
-        .nav-menu a { display: block; padding: 15px 25px; color: var(--text-color); text-decoration: none; font-size: 1.1em; transition: var(--transition); border-left: 4px solid transparent; }
-        .nav-menu a:hover { background: rgba(0, 212, 255, 0.1); border-left-color: var(--primary-color); padding-left: 30px; color: var(--primary-color); }
-        
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); opacity: 0; visibility: hidden; transition: var(--transition); z-index: 997; }
-        .overlay.active { opacity: 1; visibility: visible; }
-        
-        main { margin-top: 80px; padding: 40px 20px; }
-        
-        @media (max-width: 768px) {
-            header { padding: 15px 20px; }
-            .sidebar { width: 300px; right: -300px; }
-            .logo { font-size: 1.2em; }
-            .menu-toggle { font-size: 1.5em; }
-            main { padding: 30px 15px; }
-        }
-        
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .hero { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 60vh; text-align: center; }
-        .hero h1 { font-size: 3em; margin-bottom: 10px; }
-        .hero p { font-size: 1.2em; color: #bbb; margin-bottom: 30px; }
-        .btn { display: inline-block; padding: 12px 30px; background: var(--primary-color); color: #000; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 10px; transition: var(--transition); border: none; cursor: pointer; }
-        .btn:hover { background: #00a8cc; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4); }
-    </style>
 </head>
 <body>
-    <!-- Header with Menu Icon -->
-    <header>
-        <div class="logo">AJS</div>
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">⋮</button>
-    </header>
-    
-    <!-- Overlay -->
-    <div class="overlay" id="overlay"></div>
-    
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
-        <div class="sidebar-header">
-            <h2>Menu</h2>
-            <button class="close-btn" id="closeBtn" aria-label="Close navigation menu">✕</button>
-        </div>
-        <ul class="nav-menu">
-            <li><a href="#home" onclick="closeSidebar()">HOME</a></li>
-            <li><a href="about.html" onclick="closeSidebar()">ABOUT</a></li>
-            <li><a href="skills.html" onclick="closeSidebar()">SKILLS</a></li>
-            <li><a href="projects.html" onclick="closeSidebar()">PROJECTS</a></li>
-            <li><a href="#contact" onclick="closeSidebar()">CONTACT</a></li>
-            <li><a href="calendar.html" onclick="closeSidebar()">CALENDAR</a></li>
-        </ul>
-    </aside>
-    
-    <!-- Main Content -->
-    <main>
-        <div class="container">
-            <section class="hero">
-                <h1>Hi, I'm Adwaith</h1>
-                <p>Full Stack Developer | Data Science Enthusiast | ML Passionate</p>
-                <p>Building innovative solutions with modern web technologies and AI</p>
-                <div>
-                    <a href="#projects" class="btn">View My Projects</a>
-                    <a href="#contact" class="btn">Get In Touch</a>
+      <!-- Mobile Menu Toggle Button -->
+  <button class="menu-toggle" id="menuToggle">⋮</button>
+  
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+  
+  <!-- Sidebar Menu -->
+  <div class="sidebar" id="sidebar">
+    <ul class="nav-menu">
+      <li><a href="#home">HOME</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+      <li><a href="kills.html">SKILLS</a></li>
+      <li><a href="projects.html">PROJECTS</a></li>
+      <li><a href="#contact">CONTACT</a></li>
+         <li><a href="calendar.html">CALENDAR</a></li>
+    </ul>
+  </div>
+
+    <!-- Header/Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <div class="logo">
+<h1>AJS</h1>                    </div>
+                    <ul class="nav-menu">
+                        <li><a href="#home">HOME</a></li>
+            <li><a href="about.html">ABOUT</a></li>                        <li><a href="skills.html">SKILLS</a></li>
+                                    <li><a href="projects.html">PROJECTS</a></li>
+                                                    <li><a href="#contact">CONTACT</a></li>
+                         <li><a href="calendar.html">CALENDAR</a></li>
+                    </ul>
                 </div>
-            </section>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Hi, I'm Adwaith</h1>
+                <p class="hero-subtitle">Full Stack Developer | Data Science Enthusiast | ML Passionate</p>
+                <p class="hero-description">Building innovative solutions with modern web technologies and AI</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Projects</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
         </div>
-    </main>
-    
-    <script>
-        const menuToggle = document.getElementById('menuToggle');
-        const closeBtn = document.getElementById('closeBtn');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>Education</h3>
+                    <div class="education-item">
+                        <h4>B.Tech in Computer Science & Engineering</h4>
+                        <p class="institution">Amrita Vishwa Vidyapeetham, Amritapuri</p>
+                        <p class="year">2021 - Present</p>
+                    </div>
+                    <div class="education-item">
+                        <h4>HSC</h4>
+                        <p class="institution">SMHSS Patharam, Kerala</p>
+                        <p class="year">Scored 90%+</p>
+                    </div>
+                </div>
+                <div class="about-card">
+                    <h3>Contact Info</h3>
+                    <div class="contact-details">
+                        <p><strong>Email:</strong> <a href="mailto:adwaithjs2003@outlook.com">adwaithjs2003@outlook.com</a></p>
+                        <p><strong>Phone:</strong> <a href="tel:+919140083463">+91 9140083463</a></p>
+                        <p><strong>Location:</strong> Kollam, Kerala</p>
+                    </div>
+                    <h4 style="margin-top: 20px;">Interests</h4>
+                    <p>ML • Data Science • Web Dev • Open Source</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-box">
+                    <h4>Programming Languages</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">C</span>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <h4>Web Development</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Express</span>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <h4>Data Science & ML</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">Scikit-learn</span>
+                        <span class="skill-tag">Pandas</span>
+                        <span class="skill-tag">NumPy</span>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <h4>Databases & Tools</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Linux</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Election Management System</h3>
+                        <span class="project-date">2023</span>
+                    </div>
+                    <p class="project-description">A comprehensive electoral system using Java and DBMS. Features voter management, secure authentication, and results tabulation.</p>
+                    <div class="project-tech">
+                        <span>Java</span>
+                        <span>MySQL</span>
+                        <span>PostgreSQL</span>
+                        <span>JDBC</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Online E-Commerce Platform</h3>
+                        <span class="project-date">2023</span>
+                    </div>
+                    <p class="project-description">Full-featured shopping platform with product catalog, cart system, and payment integration. Built with modern web technologies.</p>
+                    <div class="project-tech">
+                        <span>HTML5</span>
+                        <span>CSS3</span>
+                        <span>JavaScript</span>
+                        <span>Backend</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Drone Control System</h3>
+                        <span class="project-date">2023</span>
+                    </div>
+                    <p class="project-description">Hardware-software integration project involving drone mechanics, control algorithms, and IoT implementation.</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>IoT</span>
+                        <span>Hardware</span>
+                        <span>Embedded</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>I'm always open to new opportunities and collaborations.</p>
+                    <a href="mailto:adwaithjs2003@outlook.com" class="btn btn-primary">Send an Email</a>
+                </div>
+                <div class="social-links">
+                    <h3>Follow Me</h3>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/adwaith-j-s-90231b224/" target="_blank" class="social-icon linkedin" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.instagram.com/dj_abdhu/" target="_blank" class="social-icon instagram" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.pexels.com/@adwaith-j-s-282192263/" target="_blank" class="social-icon pexels" title="Pexels">
+                            <i class="fas fa-camera"></i>
+                        </a>
+                        <a href="https://github.com/Itsaddu" target="_blank" class="social-icon github" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+      <!-- GitHub Repositories Section -->
+  <section id="repositories" class="repositories">
+    <div class="container">
+      <h2 class="section-title">GitHub Repositories</h2>
+      <div class="repos-grid">
         
-        function openSidebar() {
-            sidebar.classList.add('active');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+        <div class="repo-card">
+          <div class="repo-header">
+            <h3><a href="https://github.com/Itsaddu/Online-Jflap-thingi" target="_blank">Online-Jflap-thingi</a></h3>
+            <span class="repo-language">TypeScript</span>
+          </div>
+          <p class="repo-description">An interactive web-based tool for designing and simulating finite automata.</p>
+          <div class="repo-stats">
+            <span><i class="fas fa-star"></i> 0</span>
+            <span><i class="fas fa-code-branch"></i> 0</span>
+          </div>
+        </div>
         
-        function closeSidebar() {
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
+        <div class="repo-card">
+          <div class="repo-header">
+            <h3><a href="https://github.com/Itsaddu/Universal-Popup-Browser" target="_blank">Universal-Popup-Browser</a></h3>
+            <span class="repo-language">JavaScript</span>
+          </div>
+          <p class="repo-description">Open a small popup window with any URL and saved URL's</p>
+          <div class="repo-stats">
+            <span><i class="fas fa-star"></i> 0</span>
+            <span><i class="fas fa-code-branch"></i> 0</span>
+          </div>
+        </div>
         
-        menuToggle.addEventListener('click', openSidebar);
-        closeBtn.addEventListener('click', closeSidebar);
-        overlay.addEventListener('click', closeSidebar);
+        <div class="repo-card">
+          <div class="repo-header">
+            <h3><a href="https://github.com/Itsaddu/Calculator" target="_blank">Calculator</a></h3>
+            <span class="repo-language">Java</span>
+          </div>
+          <p class="repo-description">A simple calculator application built with Java.</p>
+          <div class="repo-stats">
+            <span><i class="fas fa-star"></i> 0</span>
+            <span><i class="fas fa-code-branch"></i> 0</span>
+          </div>
+        </div>
         
-        // Close sidebar on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeSidebar();
-        });
-    </script>
+        <div class="repo-card">
+          <div class="repo-header">
+            <h3><a href="https://github.com/Itsaddu/CalendarDiaryApp" target="_blank">CalendarDiaryApp</a></h3>
+            <span class="repo-language">Java</span>
+          </div>
+          <p class="repo-description">A calendar and diary application for organizing personal schedules and notes.</p>
+          <div class="repo-stats">
+            <span><i class="fas fa-star"></i> 0</span>
+            <span><i class="fas fa-code-branch"></i> 0</span>
+          </div>
+        </div>
+        
+        <div class="repo-card">
+          <div class="repo-header">
+            <h3><a href="https://github.com/Itsaddu/ZoopRides1" target="_blank">ZoopRides1</a></h3>
+            <span class="repo-language">JavaScript</span>
+          </div>
+          <p class="repo-description">An web based application through which users can rent a bike according to time and can also give their bikes for rent.</p>
+          <div class="repo-stats">
+            <span><i class="fas fa-star"></i> 0</span>
+            <span><i class="fas fa-code-branch"></i> 0</span>
+          </div>
+        </div>
+      </div>
+      <div class="view-more">
+        <a href="https://github.com/Itsaddu?tab=repositories" target="_blank" class="btn btn-primary">View All Repositories</a>
+      </div>
+    </div>
+  </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Adwaith JS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
