@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     sidebar.classList.add("active");
     overlay.classList.add("active");
     document.body.style.overflow = "hidden";
+    menuToggle.classList.remove("hide"); // ensure visible when open
   };
 
   // Close menu
@@ -35,19 +36,41 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("keydown", e => {
     if (e.key === "Escape") closeMenu();
   });
+
+  // ===== AUTO-HIDE MENU BUTTON ON SCROLL (MOBILE) =====
+  let lastScrollY = window.scrollY;
+
+  window.addEventListener("scroll", () => {
+    // If sidebar is open, keep menu button visible
+    if (sidebar.classList.contains("active")) {
+      menuToggle.classList.remove("hide");
+      lastScrollY = window.scrollY;
+      return;
+    }
+
+    if (window.scrollY > lastScrollY && window.scrollY > 60) {
+      // scrolling down
+      menuToggle.classList.add("hide");
+    } else {
+      // scrolling up
+      menuToggle.classList.remove("hide");
+    }
+
+    lastScrollY = window.scrollY;
+  });
 });
 
 // ===== SMOOTH SCROLL BEHAVIOR =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
-    e.preventDefault();
     const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
+    if (!target) return;
+
+    e.preventDefault();
+    target.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
   });
 });
 
@@ -68,7 +91,9 @@ const observer = new IntersectionObserver(entries => {
 }, observerOptions);
 
 // Observe elements for scroll animation
-document.querySelectorAll('.project-card, .skill-box, .repo-card, .about-card').forEach(el => {
+document.querySelectorAll(
+  '.project-card, .skill-box, .repo-card, .about-card'
+).forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(20px)';
   el.style.transition = 'all 0.6s ease';
