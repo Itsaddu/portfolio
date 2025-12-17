@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Games | Adwaith JS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Play web games built by Adwaith JS" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="games/game-common.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+
+<!-- ================= MOBILE SIDEBAR ================= -->
+
+<button class="menu-toggle" id="menuToggle" aria-label="Open menu">⋮</button>
+<div class="overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <ul class="nav-menu">
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="projects.html">PROJECTS</a></li>
+    <li><a href="repositories.html">REPOSITORIES</a></li>
+    <li><a href="games.html" class="active">GAMES</a></li>
+    <li><a href="calendar.html">CALENDAR</a></li>
+  </ul>
+</aside>
+
+<!-- ================= HEADER (DESKTOP NAV) ================= -->
+
+<header class="header">
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="logo">
+          <h1><a href="index.html">AJS</a></h1>
+        </div>
+
+        <ul class="nav-menu desktop-nav">
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="projects.html">PROJECTS</a></li>
+          <li><a href="repositories.html">REPOSITORIES</a></li>
+          <li><a href="games.html" class="active">GAMES</a></li>
+          <li><a href="index.html#contact">CONTACT</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main class="game-container">
+
+  <h1>🎮 Web Games</h1>
+  <p style="max-width:600px;margin:0 auto 40px;">
+    Play browser-based games built with pure HTML, CSS, and JavaScript.
+    All games run fully on the client — no downloads needed.
+  </p>
+
+  <section class="games-grid">
+
+    <!-- Snake -->
+    <a href="games/snake.html" class="game-card">
+      <div class="game-icon">🐍</div>
+      <h3>Snake Game</h3>
+      <p>Classic snake game built using HTML5 Canvas.</p>
+      <span class="play-btn">Play</span>
+    </a>
+
+    <!-- Memory -->
+    <a href="games/memory.html" class="game-card">
+      <div class="game-icon">🧠</div>
+      <h3>Memory Game</h3>
+      <p>Test your memory by matching cards.</p>
+      <span class="play-btn">Play</span>
+    </a>
+
+    <!-- Shooter -->
+    <a href="games/shooter.html" class="game-card">
+      <div class="game-icon">🚀</div>
+      <h3>Space Shooter</h3>
+      <p>Simple arcade shooter with keyboard controls.</p>
+      <span class="play-btn">Play</span>
+    </a>
+
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+  <p>© 2025 Adwaith JS. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

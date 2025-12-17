@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Space Shooter | Adwaith JS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="game-common.css">
+</head>
+
+<body>
+
+<button class="menu-toggle" id="menuToggle">⋮</button>
+<div class="overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <ul class="nav-menu">
+    <li><a href="../index.html">HOME</a></li>
+    <li><a href="snake.html">SNAKE</a></li>
+    <li><a href="memory.html">MEMORY</a></li>
+    <li><a href="shooter.html" class="active">SHOOTER</a></li>
+  </ul>
+</aside>
+
+<main class="game-container">
+  <h1>🚀 Space Shooter</h1>
+  <canvas id="shooter" width="320" height="400"></canvas>
+</main>
+
+<script src="../script.js"></script>
+<script src="shooter.js"></script>
+</body>
+</html>

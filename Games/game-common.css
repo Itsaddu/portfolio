@@ -1,0 +1,75 @@
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.game-card {
+  background: #1a1a2e;
+  border: 2px solid #00d4ff;
+  border-radius: 12px;
+  padding: 30px 20px;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.35);
+}
+
+.game-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.play-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 8px 22px;
+  background: #00d4ff;
+  color: #000;
+  border-radius: 20px;
+  font-weight: bold;
+}
+body {
+  background: #0f0f1e;
+}
+
+.game-container {
+  min-height: 100vh;
+  padding-top: 100px;
+  text-align: center;
+  color: white;
+}
+
+canvas {
+  background: #111;
+  border: 2px solid #00d4ff;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 70px);
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.card {
+  background: #1a1a2e;
+  border: 2px solid #00d4ff;
+  color: white;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  cursor: pointer;
+}
