@@ -1,8 +1,49 @@
+// Memory Game Variables
 const symbols = ["🍎","🍌","🍇","🍉","🍒","🍓"];
-let cards = [...symbols, ...symbols].sort(() => Math.random() - 0.5);
 const grid = document.getElementById("grid");
 let first = null, lock = false;
+let cards = [];
+let shuffledCards = [...symbols, ...symbols].sort(() => Math.random() - 0.5);
 
+// Create card elements
+shuffledCards.forEach((sym) => {
+  const card = document.createElement("div");
+  card.className = "card";
+  card.textContent = "❓";
+  card.dataset.symbol = sym;
+  
+  card.addEventListener("click", () => {
+    if (lock || card.classList.contains("open")) return;
+    card.textContent = sym;
+    card.classList.add("open");
+    
+    if (!first) {
+      first = card;
+    } else {
+      lock = true;
+      if (first.dataset.symbol !== card.dataset.symbol) {
+        setTimeout(() => {
+          first.textContent = "❓";
+          card.textContent = "❓";
+          first.classList.remove("open");
+          card.classList.remove("open");
+          first = null;
+          lock = false;
+        }, 800);
+      } else {
+        const allMatched = document.querySelectorAll(".card.open").length === 12;
+        if (allMatched) showWinMessage();
+        first = null;
+        lock = false;
+      }
+    }
+  });
+  
+  cards.push(card);
+  grid.appendChild(card);
+});
+
+// Show win message
 function showWinMessage() {
   const overlay = document.createElement('div');
   overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,255,0,0.3);display:flex;align-items:center;justify-content:center;z-index:9999';
@@ -17,40 +58,6 @@ function showWinMessage() {
   `;
   document.body.appendChild(overlay);
 }
-cards.forEach(sym => {
-  const card = document.createElement("div");
-  card.className = "card";
-  card.textContent = "❓";
-
-  card.onclick = () => {
-    if (lock || card.classList.contains("open")) return;
-    card.textContent = sym;
-    card.classList.add("open");
-
-    if (!first) {
-      first = card;
-    } else {
-      lock = true;
-      if (first.textContent !== sym) {
-        setTimeout(() => {
-          first.textContent = "❓";
-          card.textContent = "❓";
-          first.classList.remove("open");
-          card.classList.remove("open");
-          first = null;
-          lock = false;
-        }, 800);
-      } else {
-                    const allMatched = cards.length === grid.querySelectorAll('.open').length;
-            if (allMatched) showWinMessage();
-        first = null;
-        lock = false;
-      }
-    }
-  };
-
-  grid.appendChild(card);
-});
 
 // Timer functionality
 let timeRemaining = 45;
@@ -66,7 +73,7 @@ function startTimer() {
         timerDisplay.style.color = '#ff0000';
       }
     }
-if (timeRemaining <= 0) {
+    if (timeRemaining <= 0) {
       clearInterval(timerInterval);
       if (timerDisplay) {
         timerDisplay.textContent = 'Time\'s Up!';
@@ -89,14 +96,8 @@ if (timeRemaining <= 0) {
         card.style.pointerEvents = 'none';
         card.style.opacity = '0.5';
       });
-    }    }
+    }
   }, 1000);
 }
 
 startTimer();
-
-
-
-
-
-
