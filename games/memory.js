@@ -66,20 +66,35 @@ function startTimer() {
         timerDisplay.style.color = '#ff0000';
       }
     }
-    if (timeRemaining <= 0) {
+if (timeRemaining <= 0) {
       clearInterval(timerInterval);
       if (timerDisplay) {
         timerDisplay.textContent = 'Time\'s Up!';
       }
+      
+      // Create retry popup
+      const retryOverlay = document.createElement('div');
+      retryOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:9999';
+      retryOverlay.innerHTML = `
+        <div style="background:#1a1a1a;color:#0ff;padding:40px;border-radius:10px;text-align:center;border:2px solid #0ff;box-shadow:0 0 30px rgba(0,255,255,0.5)">
+          <h2 style="font-size:32px;margin-bottom:20px;">Time\'s Up!</h2>
+          <p style="font-size:18px;margin-bottom:30px;color:#0ff">Game Over</p>
+          <button onclick="location.reload()" style="padding:12px 30px;font-size:16px;background:#0ff;color:#000;border:none;border-radius:5px;cursor:pointer;font-weight:bold;margin-top:20px">Retry</button>
+        </div>
+      `;
+      document.body.appendChild(retryOverlay);
+      
+      // Disable cards
       document.querySelectorAll('.card').forEach(card => {
         card.style.pointerEvents = 'none';
         card.style.opacity = '0.5';
       });
-    }
+    }    }
   }, 1000);
 }
 
 startTimer();
+
 
 
 
