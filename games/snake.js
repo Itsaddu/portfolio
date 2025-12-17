@@ -6,6 +6,17 @@ let snake = [{ x: 160, y: 160 }];
 let dir = { x: size, y: 0 };
 let food = spawnFood();
 
+function showGameOver() {
+  ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 40px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2 - 20);
+  ctx.font = '20px Arial';
+  ctx.fillText('Press any arrow key to restart', canvas.width / 2, canvas.height / 2 + 30);
+}
+
 function spawnFood() {
   return {
     x: Math.floor(Math.random() * 16) * size,
@@ -43,6 +54,7 @@ function loop() {
   ) {
     snake = [{ x: 160, y: 160 }];
     dir = { x: size, y: 0 };
+        showGameOver();
   }
 }
 
@@ -54,3 +66,4 @@ document.addEventListener("keydown", e => {
 });
 
 setInterval(loop, 120);
+
