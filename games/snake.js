@@ -17,6 +17,21 @@ function showGameOver() {
   ctx.fillText('Press any arrow key to restart', canvas.width / 2, canvas.height / 2 + 30);
 }
 
+function showGameOverWithButtons() {
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,0,0,0.4);display:flex;align-items:center;justify-content:center;z-index:9999';
+  overlay.innerHTML = `
+    <div style="background:#000;color:#fff;padding:40px;border-radius:10px;text-align:center;box-shadow:0 0 30px rgba(255,0,0,0.8)">
+      <h2 style="font-size:40px;margin-bottom:20px;text-shadow:0 0 10px #f00">GAME OVER</h2>
+      <div style="display:flex;gap:15px;justify-content:center;margin-top:30px">
+        <button onclick="location.reload()" style="padding:12px 30px;font-size:16px;background:#ff4444;color:#fff;border:none;border-radius:5px;cursor:pointer;font-weight:bold">Retry</button>
+        <button onclick="window.location.href='../games/games.html'" style="padding:12px 30px;font-size:16px;background:#444;color:#fff;border:none;border-radius:5px;cursor:pointer;font-weight:bold">Go Back</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+}
+
 function spawnFood() {
   return {
     x: Math.floor(Math.random() * 16) * size,
@@ -54,7 +69,7 @@ function loop() {
   ) {
     snake = [{ x: 160, y: 160 }];
     dir = { x: size, y: 0 };
-        showGameOver();
+        showGameOverWithButtons();
   }
 }
 
@@ -66,4 +81,5 @@ document.addEventListener("keydown", e => {
 });
 
 setInterval(loop, 120);
+
 
