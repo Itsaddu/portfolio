@@ -52,5 +52,35 @@ cards.forEach(sym => {
   grid.appendChild(card);
 });
 
+// Timer functionality
+let timeRemaining = 45;
+let timerInterval = null;
+
+function startTimer() {
+  const timerDisplay = document.getElementById('timer');
+  timerInterval = setInterval(() => {
+    timeRemaining--;
+    if (timerDisplay) {
+      timerDisplay.textContent = `Time: ${timeRemaining}s`;
+      if (timeRemaining <= 10) {
+        timerDisplay.style.color = '#ff0000';
+      }
+    }
+    if (timeRemaining <= 0) {
+      clearInterval(timerInterval);
+      if (timerDisplay) {
+        timerDisplay.textContent = 'Time\'s Up!';
+      }
+      document.querySelectorAll('.card').forEach(card => {
+        card.style.pointerEvents = 'none';
+        card.style.opacity = '0.5';
+      });
+    }
+  }, 1000);
+}
+
+startTimer();
+
+
 
 
