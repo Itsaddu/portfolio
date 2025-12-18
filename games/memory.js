@@ -1,5 +1,5 @@
 // Memory Game Variables
-const symbols = ["🍎","🍌","🍇","🍉","🍒","🍓"];
+const symbols = ["🍎","🍌","🍇","🍉","🍒","🍓","🍊","🍋","🥑","🍆"];
 const grid = document.getElementById("grid");
 let first = null, lock = false;
 let cards = [];
@@ -31,7 +31,7 @@ shuffledCards.forEach((sym) => {
           lock = false;
         }, 800);
       } else {
-        const allMatched = document.querySelectorAll(".card.open").length === 12;
+        const allMatched = document.querySelectorAll(".card.open").length === 24;
         if (allMatched) showWinMessage();
         first = null;
         lock = false;
@@ -60,7 +60,7 @@ function showWinMessage() {
 }
 
 // Timer functionality
-let timeRemaining = 45;
+let timeRemaining = 30;
 let timerInterval = null;
 
 function startTimer() {
@@ -101,3 +101,4 @@ function startTimer() {
 }
 
 startTimer();
+
