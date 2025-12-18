@@ -1,5 +1,5 @@
 // Memory Game Variables
-const symbols = ["🍎","🍌","🍇","🍉","🍒","🍓","🍊","🍋","🥑","🍆"];
+const symbols = ["🍎","🍌","🍇","🍉","🍒","🍓","🍊","🍋","🥑","🍆","🍑","🥝"];
 const grid = document.getElementById("grid");
 let first = null, lock = false;
 let cards = [];
@@ -101,4 +101,5 @@ function startTimer() {
 }
 
 startTimer();
+
 
