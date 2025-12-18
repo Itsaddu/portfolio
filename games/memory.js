@@ -60,7 +60,7 @@ function showWinMessage() {
 }
 
 // Timer functionality
-let timeRemaining = 60;
+let timeRemaining = 120;
 let timerInterval = null;
 
 function startTimer() {
@@ -101,6 +101,7 @@ function startTimer() {
 }
 
 startTimer();
+
 
 
 
