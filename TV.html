@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Streaming Site</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: #0f0f15;
+    color: white;
+}
+
+header {
+    background: #141421;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #222;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #00bfff;
+}
+
+.home-btn {
+    background: #00bfff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.home-btn:hover {
+    background: #009acd;
+}
+
+.container {
+    padding: 30px 40px;
+}
+
+.controls {
+    background: #1a1a28;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.controls h2 {
+    margin-bottom: 15px;
+}
+
+input, select {
+    padding: 8px;
+    margin: 5px 10px 5px 0;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    padding: 10px 15px;
+    background: #00bfff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #009acd;
+}
+
+.player-container {
+    width: 100%;
+    height: 70vh;
+    background: black;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    font-size: 14px;
+    color: #777;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🎬 MyStream</div>
+    <a href="#" class="home-btn">Home</a>
+</header>
+
+<div class="container">
+
+    <div class="controls">
+        <h2>Load Content</h2>
+
+        <select id="type">
+            <option value="movie">Movie</option>
+            <option value="tv">TV Series</option>
+        </select>
+
+        <input type="number" id="tmdbId" placeholder="TMDB ID">
+
+        <input type="number" id="season" placeholder="Season (TV only)">
+        <input type="number" id="episode" placeholder="Episode (TV only)">
+
+        <input type="text" id="color" placeholder="Player Color (hex without #)">
+        <input type="number" id="progress" placeholder="Start Time (seconds)">
+
+        <label>
+            <input type="checkbox" id="autoplay"> AutoPlay
+        </label>
+
+        <label>
+            <input type="checkbox" id="nextEpisode"> Next Episode (TV)
+        </label>
+
+        <label>
+            <input type="checkbox" id="episodeSelector"> Episode Selector (TV)
+        </label>
+
+        <br><br>
+
+        <button onclick="loadContent()">Load</button>
+    </div>
+
+    <div class="player-container">
+        <iframe id="player" allowfullscreen></iframe>
+    </div>
+
+</div>
+
+<div class="footer">
+    © 2026 MyStream | Powered by VidKing
+</div>
+
+<script>
+function loadContent() {
+
+    const type = document.getElementById("type").value;
+    const tmdbId = document.getElementById("tmdbId").value;
+    const season = document.getElementById("season").value;
+    const episode = document.getElementById("episode").value;
+    const color = document.getElementById("color").value;
+    const progress = document.getElementById("progress").value;
+
+    const autoplay = document.getElementById("autoplay").checked;
+    const nextEpisode = document.getElementById("nextEpisode").checked;
+    const episodeSelector = document.getElementById("episodeSelector").checked;
+
+    if (!tmdbId) {
+        alert("Please enter TMDB ID");
+        return;
+    }
+
+    let baseURL = "https://www.vidking.net/embed/";
+
+    let url = "";
+
+    if (type === "movie") {
+        url = baseURL + "movie/" + tmdbId;
+    } else {
+        if (!season || !episode) {
+            alert("Enter Season and Episode for TV series");
+            return;
+        }
+        url = baseURL + "tv/" + tmdbId + "/" + season + "/" + episode;
+    }
+
+    let params = [];
+
+    if (color) params.push("color=" + color);
+    if (autoplay) params.push("autoPlay=true");
+    if (nextEpisode && type === "tv") params.push("nextEpisode=true");
+    if (episodeSelector && type === "tv") params.push("episodeSelector=true");
+    if (progress) params.push("progress=" + progress);
+
+    if (params.length > 0) {
+        url += "?" + params.join("&");
+    }
+
+    document.getElementById("player").src = url;
+}
+</script>
+
+</body>
+</html>
