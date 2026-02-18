@@ -1,4 +1,4 @@
-const API_KEY = "ff056ce67b4152390a7045ff97e04289";
+
 
 function login() {
     const user = document.getElementById("username").value;
@@ -32,3 +32,4 @@ function goSearch() {
 }
 
 checkAuth();
+
