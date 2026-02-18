@@ -1,3 +1,12 @@
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
 body {
     margin: 0;
     font-family: Arial;
@@ -15,11 +24,20 @@ header {
 
 button {
     padding: 8px 14px;
-    background: #00bfff;
+    background: linear-gradient(45deg, #00bfff, #0077ff);
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
 }
+
+button:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
 
 .grid {
     display: grid;
@@ -67,4 +85,94 @@ iframe {
     width: 100%;
     height: 100%;
     border: none;
+}
+
+
+
+
+.details-header {
+    display: flex;
+    gap: 25px;
+    padding: 30px;
+}
+
+.details-header img {
+    width: 250px;
+    border-radius: 10px;
+}
+
+.details-info {
+    max-width: 700px;
+}
+
+.details-info h2 {
+    margin-top: 0;
+    font-size: 28px;
+}
+
+.details-info button {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+
+
+
+.episode-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.episode-card {
+    background: #1a1a28;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.episode-card:hover {
+    transform: scale(1.05);
+}
+
+.episode-card img {
+    width: 100%;
+    border-radius: 6px;
+}
+
+.episode-card h4 {
+    margin: 10px 0 5px 0;
+}
+
+
+
+.cast-section {
+    padding: 20px;
+}
+
+.cast-section h3 {
+    margin-left: 20px;
+}
+
+.cast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+    padding: 20px;
+}
+
+.cast-card {
+    text-align: center;
+}
+
+.cast-card img {
+    width: 100%;
+    border-radius: 6px;
+}
+
+.cast-card p {
+    font-size: 14px;
+    margin-top: 5px;
 }
