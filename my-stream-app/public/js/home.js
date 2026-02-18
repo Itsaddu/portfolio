@@ -1,6 +1,6 @@
 async function loadHome() {
-    const movieRes = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${ff056ce67b4152390a7045ff97e04289}`);
-    const tvRes = await fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${ff056ce67b4152390a7045ff97e04289}`);
+    const movieRes = await fetch("/api/popular-movies");
+    const tvRes = await fetch("/api/popular-tv");
 
     const movies = await movieRes.json();
     const tvshows = await tvRes.json();
@@ -31,3 +31,4 @@ function display(items, container) {
 }
 
 loadHome();
+
