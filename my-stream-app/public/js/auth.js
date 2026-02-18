@@ -1,8 +1,6 @@
-
-
 function login() {
-    const user = document.getElementById(1234).value;
-    const pass = document.getElementById(1234).value;
+    const user = document.getElementById("username").value;
+    const pass = document.getElementById("password").value;
 
     if (user === "admin" && pass === "1234") {
         localStorage.setItem("authToken", "loggedIn");
@@ -31,6 +29,7 @@ function goSearch() {
     window.location.href = "search.html";
 }
 
-checkAuth();
-
-
+// Only protect pages except login
+if (!window.location.pathname.includes("login.html")) {
+    checkAuth();
+}
