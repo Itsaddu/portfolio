@@ -1,8 +1,8 @@
 
 
 function login() {
-    const user = document.getElementById("username").value;
-    const pass = document.getElementById("password").value;
+    const user = document.getElementById(1234).value;
+    const pass = document.getElementById(1234).value;
 
     if (user === "admin" && pass === "1234") {
         localStorage.setItem("authToken", "loggedIn");
@@ -32,4 +32,5 @@ function goSearch() {
 }
 
 checkAuth();
+
 
