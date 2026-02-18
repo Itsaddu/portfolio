@@ -1,178 +1,212 @@
-# Adwaith JS - Portfolio Website
+# 🌐 Adwaith JS -- Portfolio & Full-Stack Projects
 
-[![Live Demo](https://img.shields.io/badge/demo-online-green.svg)](https://adwaithjs.xyz)
-[![GitHub Pages](https://img.shields.io/badge/deploy-GitHub%20Pages-blue.svg)](https://pages.github.com/)
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+**Live Demo:** https://adwaithjs.xyz\
+**Streaming App:** https://stream.adwaithjs.xyz
+
+------------------------------------------------------------------------
 
 ## 📝 Overview
 
-A modern, responsive portfolio website showcasing my work as a Full Stack Developer and Data Science Enthusiast. The website features a clean design with separate pages for different sections, smooth animations, and mobile-first responsiveness.
+This repository contains my complete personal portfolio website along
+with multiple sub-projects, including browser games, a Malayalam
+calendar viewer, and a full-stack streaming web application (MyStream).
 
-🌐 **Live Website:** [https://adwaithjs.xyz](https://adwaithjs.xyz)
+The portfolio showcases my skills as a:
 
-## ✨ Features
+-   Full Stack Developer\
+-   Backend Developer\
+-   JavaScript Engineer\
+-   Data Science Enthusiast
 
-- **Multi-Page Architecture**: Separate pages for About, Skills, and Projects
-- **Responsive Design**: Fully responsive layout that works on all devices
-- **Modern UI/UX**: Clean and professional interface with smooth animations
-- **Fast Loading**: Optimized assets and minimal dependencies
-- **SEO Friendly**: Proper meta tags and semantic HTML
-- **Cross-Browser Compatible**: Works on all modern browsers
+------------------------------------------------------------------------
 
-## 🏗️ Project Structure
+## 🚀 Live Projects
 
-```
-portfolio/
-│
-├── index.html          # Homepage with Hero and Contact sections
-├── about.html          # About page with education and contact info
-├── skills.html         # Technical skills page
-├── projects.html       # Featured projects showcase
-├── styles.css          # Main stylesheet
-├── script.js           # JavaScript for animations and interactions
-├── CNAME               # Custom domain configuration
-└── README.md           # Project documentation
-```
+### 🌐 Portfolio Website
 
-## 🛠️ Technologies Used
+https://adwaithjs.xyz
 
-### Frontend
-- **HTML5** - Semantic markup
-- **CSS3** - Modern styling with Flexbox/Grid
-- **JavaScript** - Vanilla JS for interactions
-- **Font Awesome 6.4.0** - Icon library
+Built using pure HTML, CSS, and JavaScript and deployed via GitHub Pages
+with custom domain integration.
 
-### Hosting & Deployment
-- **GitHub Pages** - Static site hosting
-- **Hostinger DNS** - Custom domain management
+------------------------------------------------------------------------
 
-## 🚀 Getting Started
+### 🎬 MyStream -- Full-Stack Streaming App
 
-### Prerequisites
-- A modern web browser (Chrome, Firefox, Safari, Edge)
-- Text editor (VS Code, Sublime Text, etc.)
-- Git (optional, for cloning)
+https://stream.adwaithjs.xyz
 
-### Installation
+A secure full-stack streaming platform built using:
 
-1. **Clone the repository**
-```bash
-git clone https://github.com/Itsaddu/portfolio.git
-cd portfolio
-```
+-   Node.js + Express (backend)\
+-   TMDB API (via secure proxy)\
+-   VidKing embed player\
+-   Custom DNS + SSL via Render
 
-2. **Open locally**
-- Simply open `index.html` in your browser
-- Or use a local server (recommended):
+**Features:**\
+- Secure TMDB API key handling\
+- Movie & TV show browsing\
+- Dynamic season & episode selection\
+- Episode thumbnails\
+- Cast display\
+- Watchlist (localStorage)\
+- Continue Watching system\
+- Custom subdomain deployment
 
-```bash
-# Using Python
+------------------------------------------------------------------------
+
+### 🎮 Browser Games Collection
+
+Includes: - 🐍 Snake Game\
+- 🧠 Memory Game\
+- 🔫 Shooter Game
+
+Built using pure JavaScript and CSS animations.
+
+------------------------------------------------------------------------
+
+### 📅 Malayalam Calendar 2026 Viewer
+
+Displays monthly PNG calendar images with a clean layout.
+
+------------------------------------------------------------------------
+
+## 🏗️ Complete Project Structure
+
+    portfolio/
+    │
+    ├── Calender_png_2026/
+    │   └── Malayalam calendar PNG files
+    │
+    ├── games/
+    │   ├── games.html
+    │   ├── memory.html
+    │   ├── shooter.html
+    │   ├── snake.html
+    │   ├── memory.js
+    │   ├── shooter.js
+    │   ├── snake.js
+    │   ├── game-common.css
+    │   └── styles.css
+    │
+    ├── my-stream-app/
+    │   ├── package.json
+    │   ├── server.js
+    │   └── public/
+    │       ├── home.html
+    │       ├── login.html
+    │       ├── details.html
+    │       ├── player.html
+    │       ├── search.html
+    │       ├── css/
+    │       │   └── style.css
+    │       └── js/
+    │           ├── auth.js
+    │           ├── home.js
+    │           ├── details.js
+    │           ├── player.js
+    │           └── search.js
+    │
+    ├── index.html
+    ├── about.html
+    ├── skills.html
+    ├── projects.html
+    ├── repositories.html
+    ├── calendar.html
+    ├── styles.css
+    ├── CNAME
+    └── README.md
+
+------------------------------------------------------------------------
+
+## 🛠 Technologies Used
+
+**Frontend** - HTML5\
+- CSS3 (Flexbox, Grid)\
+- Vanilla JavaScript (ES6)
+
+**Backend (MyStream)** - Node.js\
+- Express.js\
+- node-fetch\
+- dotenv\
+- CORS
+
+**APIs** - TMDB API\
+- VidKing Embed
+
+**Hosting** - GitHub Pages (Portfolio)\
+- Render (Backend)\
+- Custom DNS (Domain & SSL)
+
+------------------------------------------------------------------------
+
+## 🔐 Security Implementation (Streaming App)
+
+-   TMDB API key stored securely in environment variables\
+-   Backend proxy prevents API exposure\
+-   Custom CAA configuration allowing Let's Encrypt\
+-   SSL enabled on subdomain\
+-   Protected routes using client-side auth logic
+
+------------------------------------------------------------------------
+
+## ⚙️ Local Development
+
+### Portfolio (Static)
+
+Open `index.html` directly in your browser\
+or run a local server:
+
+``` bash
 python -m http.server 8000
-
-# Using Node.js
-npx http-server
 ```
 
-3. **Access the website**
-- Navigate to `http://localhost:8000` in your browser
+### MyStream Backend
 
-## 📄 Pages
+Inside `my-stream-app`:
 
-### Home (`index.html`)
-- Hero section with introduction
-- Navigation to other pages
-- Contact section with social links
-
-### About (`about.html`)
-- Educational background
-- Contact information
-- Professional interests
-
-### Skills (`skills.html`)
-- Programming Languages (Python, JavaScript, Java, SQL, C)
-- Web Development (HTML5, CSS3, React, Node.js, Express)
-- Data Science & ML (Machine Learning, TensorFlow, Scikit-learn, Pandas, NumPy)
-- Databases & Tools (MySQL, PostgreSQL, Git, Docker, Linux)
-
-### Projects (`projects.html`)
-- Election Management System
-- Online E-Commerce Platform
-- Drone Control System
-
-## 🎨 Customization
-
-### Updating Content
-1. Edit HTML files to update text content
-2. Modify `styles.css` to change colors, fonts, spacing
-3. Update `script.js` for interactive behavior
-
-### Changing Colors
-Main color variables are defined in `styles.css`. Update the CSS variables to match your brand:
-
-```css
-:root {
-  --primary-color: your-color;
-  --secondary-color: your-color;
-  /* Add your custom colors */
-}
+``` bash
+npm install
+npm start
 ```
+
+**Environment Variables:**
+
+``` env
+TMDB_API_KEY=your_tmdb_api_key
+PORT=3000
+```
+
+------------------------------------------------------------------------
 
 ## 📱 Responsive Breakpoints
 
-- **Mobile**: < 768px
-- **Tablet**: 768px - 1024px
-- **Desktop**: > 1024px
+-   Mobile: \< 768px\
+-   Tablet: 768px -- 1024px\
+-   Desktop: \> 1024px
 
-## 🌐 Deployment
+------------------------------------------------------------------------
 
-This project is deployed using **GitHub Pages** with a custom domain.
+## 🧠 Learning Outcomes
 
-### Deploy Your Own
+This project demonstrates:
 
-1. Fork this repository
-2. Go to Settings > Pages
-3. Select `main` branch as source
-4. (Optional) Add custom domain in CNAME file
-5. Your site will be live at `https://yourusername.github.io/portfolio`
+-   Full-stack architecture design\
+-   Secure API proxy implementation\
+-   DNS configuration (CNAME + CAA)\
+-   SSL certificate debugging\
+-   Cloud deployment workflow\
+-   Client-side state management\
+-   Streaming metadata rendering
+
+------------------------------------------------------------------------
 
 ## 👨‍💻 About Me
 
-**Adwaith JS**  
-B.Tech in Computer Science & Engineering  
-Amrita Vishwa Vidyapeetham, Amritapuri  
+**Adwaith JS**\
+B.Tech -- Computer Science & Engineering\
+Amrita Vishwa Vidyapeetham, Amritapuri
 
-- 📧 Email: [adwaithjs2003@outlook.com](mailto:adwaithjs2003@outlook.com)
-- 💼 LinkedIn: [linkedin.com/in/adwaith-j-s-90231b224](https://www.linkedin.com/in/adwaith-j-s-90231b224/)
-- 🐙 GitHub: [github.com/Itsaddu](https://github.com/Itsaddu)
-- 📷 Pexels: [pexels.com/@adwaith-j-s-282192263](https://www.pexels.com/@adwaith-j-s-282192263/)
-
-## 📜 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome!
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📞 Contact
-
-Feel free to reach out for collaborations or just a friendly chat!
-
-- **Website**: [https://adwaithjs.xyz](https://adwaithjs.xyz)
-- **Email**: adwaithjs2003@outlook.com
-- **Phone**: +91 9140083463
-
----
-
-<div align="center">
-  <p>Made with ❤️ by Adwaith JS</p>
-  <p>© 2025 Adwaith JS. All rights reserved.</p>
-</div>
+📧 Email: adwaithjs2003@outlook.com\
+💼 LinkedIn: https://linkedin.com/in/adwaith-j-s-90231b224\
+🐙 GitHub: https://github.com/Itsaddu\
+🌐 Website: https://adwaithjs.xyz
