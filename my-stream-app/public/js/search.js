@@ -24,10 +24,11 @@ function displayResults(results) {
         `;
 
         card.onclick = () => {
-            window.location.href = `player.html?id=${item.id}&type=${item.media_type}`;
+            window.location.href = `details.html?id=${item.id}&type=${item.media_type}`;
         };
 
         container.appendChild(card);
     });
 }
+
 
