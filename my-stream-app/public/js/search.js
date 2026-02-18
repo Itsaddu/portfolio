@@ -1,9 +1,8 @@
 async function search() {
     const query = document.getElementById("query").value;
 
-    const res = await fetch(
-        `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${query}`
-    );
+    const res = await fetch(`/api/search?q=${query}`);
+
 
     const data = await res.json();
     displayResults(data.results);
@@ -31,3 +30,4 @@ function displayResults(results) {
         container.appendChild(card);
     });
 }
+
