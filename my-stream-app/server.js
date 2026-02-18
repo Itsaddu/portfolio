@@ -41,5 +41,17 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);
 });
+app.get("/api/search", async (req, res) => {
+    const query = req.query.q;
+
+    const response = await fetch(
+        `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${query}`
+    );
+
+    const data = await response.json();
+    res.json(data);
+});
+
+
 
 
