@@ -23,7 +23,7 @@ function display(items, container) {
         `;
 
         card.onclick = () => {
-            window.location.href = `player.html?id=${item.id}&type=${item.media_type || (container === "movies" ? "movie" : "tv")}`;
+            window.location.href = `details.html?id=${item.id}&type=${item.media_type || (container === "movies" ? "movie" : "tv")}`;
         };
 
         div.appendChild(card);
@@ -31,4 +31,5 @@ function display(items, container) {
 }
 
 loadHome();
+
 
