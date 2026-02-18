@@ -85,4 +85,19 @@ app.get("/api/details", async (req, res) => {
     }
 });
 
+app.get("/api/season", async (req, res) => {
+    try {
+        const { id, season } = req.query;
+
+        const response = await fetch(
+            `https://api.themoviedb.org/3/tv/${id}/season/${season}?api_key=${API_KEY}`
+        );
+
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to fetch season" });
+    }
+});
+
 
