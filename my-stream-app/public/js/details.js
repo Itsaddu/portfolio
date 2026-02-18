@@ -9,24 +9,36 @@ async function loadDetails() {
     const container = document.getElementById("details-container");
 
     container.innerHTML = `
-        <img src="https://image.tmdb.org/t/p/w500${data.poster_path}">
-        <h2>${data.title || data.name}</h2>
-        <p>${data.overview}</p>
-        <p><strong>Rating:</strong> ${data.vote_average}</p>
-        <p><strong>Release:</strong> ${data.release_date || data.first_air_date}</p>
+        <div class="details-header">
+            <img src="https://image.tmdb.org/t/p/w500${data.poster_path}">
+            <div class="details-info">
+                <h2>${data.title || data.name}</h2>
+                <p>${data.overview}</p>
+                <p><strong>Rating:</strong> ${data.vote_average}</p>
+                <p><strong>Release:</strong> ${data.release_date || data.first_air_date}</p>
+                <button onclick="addToWatchlist()">Add to Watchlist</button>
+                <div id="continueSection"></div>
+            </div>
+        </div>
         <div id="extra"></div>
+        <div id="castSection"></div>
     `;
+
+    checkContinueWatching();
 
     if (type === "tv") {
         loadSeasons(data.number_of_seasons);
     } else {
         addWatchButton();
     }
+
+    loadCast();
 }
+
+/* ---------------- MOVIE WATCH ---------------- */
 
 function addWatchButton() {
     const extra = document.getElementById("extra");
-
     extra.innerHTML = `
         <button onclick="watchMovie()">Watch Now</button>
     `;
@@ -36,7 +48,9 @@ function watchMovie() {
     window.location.href = `player.html?id=${id}&type=movie`;
 }
 
-function loadSeasons(totalSeasons) {
+/* ---------------- TV SEASONS ---------------- */
+
+async function loadSeasons(totalSeasons) {
     const extra = document.getElementById("extra");
 
     let seasonOptions = "";
@@ -46,20 +60,108 @@ function loadSeasons(totalSeasons) {
 
     extra.innerHTML = `
         <label>Select Season:</label>
-        <select id="seasonSelect">${seasonOptions}</select>
+        <select id="seasonSelect"></select>
+        <div id="episodeList" class="episode-grid"></div>
+    `;
 
-        <label>Select Episode:</label>
-        <input type="number" id="episodeSelect" min="1" value="1">
+    document.getElementById("seasonSelect").innerHTML = seasonOptions;
 
-        <button onclick="watchTV()">Watch</button>
+    loadEpisodes(1);
+
+    document.getElementById("seasonSelect").addEventListener("change", (e) => {
+        loadEpisodes(e.target.value);
+    });
+}
+
+/* ---------------- EPISODES ---------------- */
+
+async function loadEpisodes(seasonNumber) {
+    const res = await fetch(`/api/season?id=${id}&season=${seasonNumber}`);
+    const data = await res.json();
+
+    const list = document.getElementById("episodeList");
+    list.innerHTML = "";
+
+    data.episodes.forEach(ep => {
+        const div = document.createElement("div");
+        div.className = "episode-card";
+
+        div.innerHTML = `
+            <img src="https://image.tmdb.org/t/p/w300${ep.still_path || ''}">
+            <h4>Episode ${ep.episode_number}: ${ep.name}</h4>
+            <p>${ep.overview || ""}</p>
+        `;
+
+        div.onclick = () => {
+            window.location.href =
+                `player.html?id=${id}&type=tv&season=${seasonNumber}&episode=${ep.episode_number}`;
+        };
+
+        list.appendChild(div);
+    });
+}
+
+/* ---------------- CAST ---------------- */
+
+async function loadCast() {
+    const res = await fetch(`/api/cast?id=${id}&type=${type}`);
+    const data = await res.json();
+
+    const castDiv = document.getElementById("castSection");
+
+    castDiv.innerHTML = `<h3>Cast</h3><div class="cast-grid"></div>`;
+    const grid = castDiv.querySelector(".cast-grid");
+
+    data.cast.slice(0, 8).forEach(actor => {
+        const card = document.createElement("div");
+        card.className = "cast-card";
+
+        card.innerHTML = `
+            <img src="https://image.tmdb.org/t/p/w200${actor.profile_path || ''}">
+            <p>${actor.name}</p>
+        `;
+
+        grid.appendChild(card);
+    });
+}
+
+/* ---------------- WATCHLIST ---------------- */
+
+function addToWatchlist() {
+    let list = JSON.parse(localStorage.getItem("watchlist")) || [];
+
+    if (!list.find(item => item.id == id)) {
+        list.push({ id, type });
+        localStorage.setItem("watchlist", JSON.stringify(list));
+        alert("Added to Watchlist");
+    }
+}
+
+/* ---------------- CONTINUE WATCHING ---------------- */
+
+function checkContinueWatching() {
+    const saved = localStorage.getItem("continue_" + id);
+    if (!saved) return;
+
+    const data = JSON.parse(saved);
+
+    const section = document.getElementById("continueSection");
+
+    section.innerHTML = `
+        <button onclick="continueWatching()">Continue Watching</button>
     `;
 }
 
-function watchTV() {
-    const season = document.getElementById("seasonSelect").value;
-    const episode = document.getElementById("episodeSelect").value;
+function continueWatching() {
+    const saved = JSON.parse(localStorage.getItem("continue_" + id));
 
-    window.location.href = `player.html?id=${id}&type=tv&season=${season}&episode=${episode}`;
+    if (type === "tv") {
+        window.location.href =
+            `player.html?id=${id}&type=tv&season=${saved.season}&episode=${saved.episode}&progress=${saved.time}`;
+    } else {
+        window.location.href =
+            `player.html?id=${id}&type=movie&progress=${saved.time}`;
+    }
 }
 
 loadDetails();
