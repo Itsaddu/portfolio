@@ -17,6 +17,16 @@ app.get("/api/popular-movies", async (req, res) => {
     res.json(data);
 });
 
+
+app.get("/api/popular-tv", async (req, res) => {
+    const response = await fetch(
+        `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}`
+    );
+    const data = await response.json();
+    res.json(data);
+});
+
+
 app.get("/api/search", async (req, res) => {
     const query = req.query.q;
     const response = await fetch(
@@ -31,4 +41,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);
 });
+
 
