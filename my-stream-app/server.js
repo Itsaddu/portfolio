@@ -107,15 +107,6 @@ app.post("/api/login", loginLimiter, async (req, res) => {
 
 /* ================= FOR THE BUTTONS I GAUSS ================= */
 
-document.addEventListener("DOMContentLoaded", () => {
-
-  const logoutBtn = document.getElementById("logoutBtn");
-  if (logoutBtn) logoutBtn.addEventListener("click", logout);
-
-  const searchBtn = document.getElementById("searchBtn");
-  if (searchBtn) searchBtn.addEventListener("click", goSearch);
-
-});
 
 
 
@@ -246,4 +237,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);
 });
+
 
