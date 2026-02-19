@@ -2,8 +2,20 @@ const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 const type = params.get("type");
 
+const token = localStorage.getItem("authToken");
+
+if (!token) {
+    window.location.href = "login.html";
+}
+
+
 async function loadDetails() {
-    const res = await fetch(`/api/details?id=${id}&type=${type}`);
+    const res = await fetch(`/api/details?id=${id}&type=${type}`, {
+    headers: {
+        Authorization: `Bearer ${token}`
+        }
+    });
+
     const data = await res.json();
 
     const container = document.getElementById("details-container");
@@ -76,7 +88,12 @@ async function loadSeasons(totalSeasons) {
 /* ---------------- EPISODES ---------------- */
 
 async function loadEpisodes(seasonNumber) {
-    const res = await fetch(`/api/season?id=${id}&season=${seasonNumber}`);
+    const res = await fetch(`/api/season?id=${id}&season=${seasonNumber}`, {
+    headers: {
+        Authorization: `Bearer ${token}`
+        }
+    });
+
     const data = await res.json();
 
     const list = document.getElementById("episodeList");
@@ -104,7 +121,12 @@ async function loadEpisodes(seasonNumber) {
 /* ---------------- CAST ---------------- */
 
 async function loadCast() {
-    const res = await fetch(`/api/cast?id=${id}&type=${type}`);
+    const res = await fetch(`/api/cast?id=${id}&type=${type}`, {
+    headers: {
+        Authorization: `Bearer ${token}`
+        }
+    });
+
     const data = await res.json();
 
     const castDiv = document.getElementById("castSection");
