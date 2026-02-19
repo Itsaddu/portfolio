@@ -1,22 +1,34 @@
 async function login() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-    const res = await fetch("/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
-    });
+    if (!username || !password) {
+        alert("Please enter username and password");
+        return;
+    }
 
-    const data = await res.json();
+    try {
+        const res = await fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password })
+        });
 
-    if (res.ok) {
-        localStorage.setItem("authToken", data.token);
-        window.location.href = "home.html";
-    } else {
-        alert("Invalid login");
+        const data = await res.json();
+
+        if (res.ok) {
+            localStorage.setItem("authToken", data.token);
+            window.location.href = "home.html";
+        } else {
+            alert(data.error || "Invalid login");
+        }
+
+    } catch (error) {
+        alert("Server error. Please try again.");
+        console.error("Login error:", error);
     }
 }
+
 
 function logout() {
     localStorage.removeItem("authToken");
@@ -41,4 +53,5 @@ function goSearch() {
 if (!window.location.pathname.includes("login.html")) {
     checkAuth();
 }
+
 
