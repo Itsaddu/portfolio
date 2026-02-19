@@ -23,13 +23,17 @@ app.use(
           "https://image.tmdb.org",
           "data:"
         ],
-        connectSrc: [
-          "'self'"
+        connectSrc: ["'self'"],
+        frameSrc: [
+          "'self'",
+          "https://www.vidking.net"
         ]
       }
-    }
+    },
+    frameguard: false
   })
 );
+
 
 app.use(cors());
 app.use(express.json());
@@ -237,5 +241,6 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);
 });
+
 
 
