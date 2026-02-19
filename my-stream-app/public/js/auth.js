@@ -1,9 +1,17 @@
-function login() {
-    const user = document.getElementById("username").value;
-    const pass = document.getElementById("password").value;
+async function login() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-    if (user === "admin" && pass === "1234") {
-        localStorage.setItem("authToken", "loggedIn");
+    const res = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+        localStorage.setItem("authToken", data.token);
         window.location.href = "home.html";
     } else {
         alert("Invalid login");
@@ -33,3 +41,4 @@ function goSearch() {
 if (!window.location.pathname.includes("login.html")) {
     checkAuth();
 }
+
