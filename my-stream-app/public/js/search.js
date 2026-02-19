@@ -1,12 +1,17 @@
 async function search() {
     const query = document.getElementById("query").value;
+    const token = localStorage.getItem("authToken");
 
-    const res = await fetch(`/api/search?q=${query}`);
-
+    const res = await fetch(`/api/search?q=${query}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
 
     const data = await res.json();
     displayResults(data.results);
 }
+
 
 function displayResults(results) {
     const container = document.getElementById("results");
@@ -30,5 +35,6 @@ function displayResults(results) {
         container.appendChild(card);
     });
 }
+
 
 
