@@ -56,3 +56,10 @@ if (!window.location.pathname.includes("login.html")) {
 
 
 
+document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("loginBtn");
+    if (btn) {
+        btn.addEventListener("click", login);
+    }
+});
+
