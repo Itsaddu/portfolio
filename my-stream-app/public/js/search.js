@@ -4,15 +4,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const homeBtn = document.getElementById("homeBtn");
     const queryInput = document.getElementById("query");
 
-    homeBtn.addEventListener("click", () => {
+    // Home button
+    homeBtn?.addEventListener("click", () => {
         window.location.href = "home.html";
     });
 
-    searchBtn.addEventListener("click", async () => {
-        const query = queryInput.value.trim();
-        if (!query) return;
+    // Search button click
+    searchBtn?.addEventListener("click", performSearch);
 
-        const token = localStorage.getItem("authToken");
+    // Press Enter inside input
+    queryInput?.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            performSearch();
+        }
+    });
+
+});
+
+async function performSearch() {
+
+    const query = document.getElementById("query").value.trim();
+    const token = localStorage.getItem("authToken");
+
+    if (!query) return;
+
+    try {
 
         const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`, {
             headers: {
@@ -21,21 +38,30 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (!res.ok) {
-            alert("Search failed. Maybe session expired?");
+            console.error("Search failed");
             return;
         }
 
         const data = await res.json();
         displayResults(data.results);
-    });
 
-});
+    } catch (err) {
+        console.error("Error:", err);
+    }
+}
 
 function displayResults(results) {
+
     const container = document.getElementById("results");
     container.innerHTML = "";
 
+    if (!results || results.length === 0) {
+        container.innerHTML = "<p>No results found</p>";
+        return;
+    }
+
     results.forEach(item => {
+
         if (!item.poster_path) return;
 
         const card = document.createElement("div");
@@ -48,10 +74,9 @@ function displayResults(results) {
 
         card.addEventListener("click", () => {
             window.location.href =
-                `details.html?id=${item.id}&type=${item.media_type || "movie"}`;
+                `details.html?id=${item.id}&type=${item.media_type}`;
         });
 
         container.appendChild(card);
     });
 }
-/*hi*/
