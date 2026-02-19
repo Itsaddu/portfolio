@@ -74,8 +74,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (searchBtn) {
         searchBtn.addEventListener("click", goSearch);
     }
+    const homeBtn = document.getElementById("homeBtn");
+    if (homeBtn) {
+        homeBtn.addEventListener("click", goHome);
+    }
 
 });
+
 
 
 
