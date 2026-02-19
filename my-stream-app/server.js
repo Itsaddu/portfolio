@@ -16,13 +16,26 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
-const API_KEY = process.env.TMDB_API_KEY;
-const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
+/* ================= ENV VARIABLES ================= */
 
-/* ================= BASIC ENV CHECK ================= */
+const API_KEY = process.env.TMDB_API_KEY;
+const JWT_SECRET = process.env.JWT_SECRET;
+const ADMIN_USER = process.env.ADMIN_USER;
+const ADMIN_PASS = process.env.ADMIN_PASS;
 
 if (!API_KEY) {
     console.error("TMDB_API_KEY is missing in environment variables.");
+    process.exit(1);
+}
+
+if (!JWT_SECRET) {
+    console.error("JWT_SECRET is missing in environment variables.");
+    process.exit(1);
+}
+
+if (!ADMIN_USER || !ADMIN_PASS) {
+    console.error("ADMIN_USER or ADMIN_PASS missing in environment variables.");
+    process.exit(1);
 }
 
 /* ================= ROOT ROUTE ================= */
@@ -31,13 +44,9 @@ app.get("/", (req, res) => {
     res.redirect("/login.html");
 });
 
-/* ================= DEMO USER ================= */
-/* For personal use only */
+/* ================= HASH PASSWORD (FROM ENV) ================= */
 
-const demoUser = {
-    username: "admin",
-    password: bcrypt.hashSync("1234", 10)
-};
+const hashedPassword = bcrypt.hashSync(ADMIN_PASS, 10);
 
 /* ================= LOGIN RATE LIMIT ================= */
 
@@ -53,17 +62,21 @@ app.post("/api/login", loginLimiter, async (req, res) => {
     try {
         const { username, password } = req.body;
 
-        if (username !== demoUser.username) {
+        if (username !== ADMIN_USER) {
             return res.status(401).json({ error: "Invalid credentials" });
         }
 
-        const valid = await bcrypt.compare(password, demoUser.password);
+        const valid = await bcrypt.compare(password, hashedPassword);
 
         if (!valid) {
             return res.status(401).json({ error: "Invalid credentials" });
         }
 
-        const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: "2h" });
+        const token = jwt.sign(
+            { username },
+            JWT_SECRET,
+            { expiresIn: "2h" }
+        );
 
         res.json({ token });
 
