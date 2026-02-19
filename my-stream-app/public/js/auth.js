@@ -49,9 +49,10 @@ function goSearch() {
     window.location.href = "search.html";
 }
 
-// Only protect pages except login
+// Only protect pages except login   ---
 if (!window.location.pathname.includes("login.html")) {
     checkAuth();
 }
+
 
 
