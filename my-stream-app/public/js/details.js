@@ -2,17 +2,24 @@ const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 const type = params.get("type");
 
-const token = localStorage.getItem("authToken");
+document.addEventListener("DOMContentLoaded", () => {
+    loadDetails();
 
-if (!token) {
-    window.location.href = "login.html";
-}
-
+    // Home button (if exists in header)
+    const homeBtn = document.getElementById("homeBtn");
+    if (homeBtn) {
+        homeBtn.addEventListener("click", () => {
+            window.location.href = "home.html";
+        });
+    }
+});
 
 async function loadDetails() {
+    const token = localStorage.getItem("authToken");
+
     const res = await fetch(`/api/details?id=${id}&type=${type}`, {
-    headers: {
-        Authorization: `Bearer ${token}`
+        headers: {
+            Authorization: `Bearer ${token}`
         }
     });
 
@@ -28,13 +35,17 @@ async function loadDetails() {
                 <p>${data.overview}</p>
                 <p><strong>Rating:</strong> ${data.vote_average}</p>
                 <p><strong>Release:</strong> ${data.release_date || data.first_air_date}</p>
-                <button onclick="addToWatchlist()">Add to Watchlist</button>
+
+                <button id="watchlistBtn">Add to Watchlist</button>
                 <div id="continueSection"></div>
             </div>
         </div>
         <div id="extra"></div>
         <div id="castSection"></div>
     `;
+
+    document.getElementById("watchlistBtn")
+        .addEventListener("click", addToWatchlist);
 
     checkContinueWatching();
 
@@ -51,9 +62,13 @@ async function loadDetails() {
 
 function addWatchButton() {
     const extra = document.getElementById("extra");
+
     extra.innerHTML = `
-        <button onclick="watchMovie()">Watch Now</button>
+        <button id="watchBtn">Watch Now</button>
     `;
+
+    document.getElementById("watchBtn")
+        .addEventListener("click", watchMovie);
 }
 
 function watchMovie() {
@@ -63,6 +78,8 @@ function watchMovie() {
 /* ---------------- TV SEASONS ---------------- */
 
 async function loadSeasons(totalSeasons) {
+    const token = localStorage.getItem("authToken");
+
     const extra = document.getElementById("extra");
 
     let seasonOptions = "";
@@ -72,25 +89,26 @@ async function loadSeasons(totalSeasons) {
 
     extra.innerHTML = `
         <label>Select Season:</label>
-        <select id="seasonSelect"></select>
+        <select id="seasonSelect">${seasonOptions}</select>
         <div id="episodeList" class="episode-grid"></div>
     `;
 
-    document.getElementById("seasonSelect").innerHTML = seasonOptions;
-
     loadEpisodes(1);
 
-    document.getElementById("seasonSelect").addEventListener("change", (e) => {
-        loadEpisodes(e.target.value);
-    });
+    document.getElementById("seasonSelect")
+        .addEventListener("change", (e) => {
+            loadEpisodes(e.target.value);
+        });
 }
 
 /* ---------------- EPISODES ---------------- */
 
 async function loadEpisodes(seasonNumber) {
+    const token = localStorage.getItem("authToken");
+
     const res = await fetch(`/api/season?id=${id}&season=${seasonNumber}`, {
-    headers: {
-        Authorization: `Bearer ${token}`
+        headers: {
+            Authorization: `Bearer ${token}`
         }
     });
 
@@ -109,10 +127,10 @@ async function loadEpisodes(seasonNumber) {
             <p>${ep.overview || ""}</p>
         `;
 
-        div.onclick = () => {
+        div.addEventListener("click", () => {
             window.location.href =
                 `player.html?id=${id}&type=tv&season=${seasonNumber}&episode=${ep.episode_number}`;
-        };
+        });
 
         list.appendChild(div);
     });
@@ -121,9 +139,11 @@ async function loadEpisodes(seasonNumber) {
 /* ---------------- CAST ---------------- */
 
 async function loadCast() {
+    const token = localStorage.getItem("authToken");
+
     const res = await fetch(`/api/cast?id=${id}&type=${type}`, {
-    headers: {
-        Authorization: `Bearer ${token}`
+        headers: {
+            Authorization: `Bearer ${token}`
         }
     });
 
@@ -165,13 +185,14 @@ function checkContinueWatching() {
     const saved = localStorage.getItem("continue_" + id);
     if (!saved) return;
 
-    const data = JSON.parse(saved);
-
     const section = document.getElementById("continueSection");
 
     section.innerHTML = `
-        <button onclick="continueWatching()">Continue Watching</button>
+        <button id="continueBtn">Continue Watching</button>
     `;
+
+    document.getElementById("continueBtn")
+        .addEventListener("click", continueWatching);
 }
 
 function continueWatching() {
@@ -185,5 +206,3 @@ function continueWatching() {
             `player.html?id=${id}&type=movie&progress=${saved.time}`;
     }
 }
-
-loadDetails();
