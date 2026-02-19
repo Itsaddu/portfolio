@@ -1,6 +1,17 @@
 async function loadHome() {
-    const movieRes = await fetch("/api/popular-movies");
-    const tvRes = await fetch("/api/popular-tv");
+    const token = localStorage.getItem("authToken");
+
+    const movieRes = await fetch("/api/popular-movies", {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    const tvRes = await fetch("/api/popular-tv", {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
 
     const movies = await movieRes.json();
     const tvshows = await tvRes.json();
@@ -8,6 +19,7 @@ async function loadHome() {
     display(movies.results, "movies");
     display(tvshows.results, "tvshows");
 }
+
 
 function display(items, container) {
     const div = document.getElementById(container);
@@ -31,5 +43,6 @@ function display(items, container) {
 }
 
 loadHome();
+
 
 
