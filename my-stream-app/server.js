@@ -1,11 +1,11 @@
 const express = require("express");
-const fetch = require("node-fetch");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 require("dotenv").config();
+
 
 const app = express();
 
