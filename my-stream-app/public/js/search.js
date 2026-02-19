@@ -1,17 +1,35 @@
-async function search() {
-    const query = document.getElementById("query").value;
-    const token = localStorage.getItem("authToken");
+document.addEventListener("DOMContentLoaded", () => {
 
-    const res = await fetch(`/api/search?q=${query}`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
+    const searchBtn = document.getElementById("searchBtn");
+    const homeBtn = document.getElementById("homeBtn");
+    const queryInput = document.getElementById("query");
+
+    homeBtn.addEventListener("click", () => {
+        window.location.href = "home.html";
     });
 
-    const data = await res.json();
-    displayResults(data.results);
-}
+    searchBtn.addEventListener("click", async () => {
+        const query = queryInput.value.trim();
+        if (!query) return;
 
+        const token = localStorage.getItem("authToken");
+
+        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        if (!res.ok) {
+            alert("Search failed. Maybe session expired?");
+            return;
+        }
+
+        const data = await res.json();
+        displayResults(data.results);
+    });
+
+});
 
 function displayResults(results) {
     const container = document.getElementById("results");
@@ -28,13 +46,11 @@ function displayResults(results) {
             <p>${item.title || item.name}</p>
         `;
 
-        card.onclick = () => {
-            window.location.href = `details.html?id=${item.id}&type=${item.media_type}`;
-        };
+        card.addEventListener("click", () => {
+            window.location.href =
+                `details.html?id=${item.id}&type=${item.media_type || "movie"}`;
+        });
 
         container.appendChild(card);
     });
 }
-
-
-
