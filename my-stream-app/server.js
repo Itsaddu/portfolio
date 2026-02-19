@@ -11,7 +11,26 @@ const app = express();
 
 /* ================= SECURITY MIDDLEWARE ================= */
 
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        imgSrc: [
+          "'self'",
+          "https://image.tmdb.org",
+          "data:"
+        ],
+        connectSrc: [
+          "'self'"
+        ]
+      }
+    }
+  })
+);
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
@@ -84,6 +103,22 @@ app.post("/api/login", loginLimiter, async (req, res) => {
         res.status(500).json({ error: "Login failed" });
     }
 });
+
+
+/* ================= FOR THE BUTTONS I GAUSS ================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) logoutBtn.addEventListener("click", logout);
+
+  const searchBtn = document.getElementById("searchBtn");
+  if (searchBtn) searchBtn.addEventListener("click", goSearch);
+
+});
+
+
+
 
 /* ================= JWT VERIFY MIDDLEWARE ================= */
 
@@ -211,3 +246,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);
 });
+
