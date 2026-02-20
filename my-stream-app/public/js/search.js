@@ -27,7 +27,13 @@ async function performSearch() {
     const query = document.getElementById("query").value.trim();
     const token = localStorage.getItem("authToken");
 
-    if (!query) return;
+    console.log("Searching for:", query);
+    console.log("Token:", token);
+
+    if (!query) {
+        console.log("Empty query");
+        return;
+    }
 
     try {
 
@@ -37,16 +43,21 @@ async function performSearch() {
             }
         });
 
+        console.log("Response status:", res.status);
+
+        const data = await res.json();
+        console.log("Response data:", data);
+
         if (!res.ok) {
-            console.error("Search failed");
+            alert("Search failed: " + data.error);
             return;
         }
 
-        const data = await res.json();
         displayResults(data.results);
 
     } catch (err) {
         console.error("Error:", err);
+        alert("Something went wrong");
     }
 }
 
@@ -80,3 +91,4 @@ function displayResults(results) {
         container.appendChild(card);
     });
 }
+
