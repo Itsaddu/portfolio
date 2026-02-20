@@ -29,12 +29,14 @@ app.use(
 
         connectSrc: [
           "'self'",
-          "https:"     // 🔥 allow HTTPS API connections
+          "https://stream.adwaithjs.xyz"
         ],
 
         frameSrc: [
           "'self'",
-          "https:"     // 🔥 allow VidKing + any HTTPS video source
+          "https://vidking.net",
+          "https://www.vidking.net",
+          "https:"
         ]
       }
     },
@@ -253,6 +255,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);
 });
+
 
 
 
