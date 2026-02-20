@@ -16,24 +16,32 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
+
         scriptSrc: ["'self'"],
+
         styleSrc: ["'self'", "'unsafe-inline'"],
+
         imgSrc: [
           "'self'",
           "https://image.tmdb.org",
           "data:"
         ],
-        connectSrc: ["'self'"],
+
+        connectSrc: [
+          "'self'",
+          "https:"     // 🔥 allow HTTPS API connections
+        ],
+
         frameSrc: [
           "'self'",
-          "https://www.vidking.net"
+          "https:"     // 🔥 allow VidKing + any HTTPS video source
         ]
       }
     },
+
     frameguard: false
   })
 );
-
 
 app.use(cors());
 app.use(express.json());
@@ -241,6 +249,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);
 });
+
 
 
 
