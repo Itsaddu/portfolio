@@ -30,10 +30,7 @@ async function performSearch() {
     console.log("Searching for:", query);
     console.log("Token:", token);
 
-    if (!query) {
-        console.log("Empty query");
-        return;
-    }
+    if (!query) return;
 
     try {
 
@@ -44,19 +41,21 @@ async function performSearch() {
         });
 
         console.log("Response status:", res.status);
+        console.log("Response headers:", [...res.headers]);
 
-        const data = await res.json();
-        console.log("Response data:", data);
+        const text = await res.text();   // 🔥 get raw response first
+        console.log("Raw response:", text);
 
         if (!res.ok) {
-            alert("Search failed: " + data.error);
+            alert("Search failed: " + text);
             return;
         }
 
+        const data = JSON.parse(text);
         displayResults(data.results);
 
     } catch (err) {
-        console.error("Error:", err);
+        console.error("FULL ERROR:", err);
         alert("Something went wrong");
     }
 }
@@ -91,4 +90,5 @@ function displayResults(results) {
         container.appendChild(card);
     });
 }
+
 
