@@ -4,18 +4,22 @@
     <title>Player</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-
 <header>
     <button id="homeBtn">Home</button>
 </header>
+
+<div class="source-selector">
+    <button class="source-btn" data-source="vidking">VidKing</button>
+    <button class="source-btn" data-source="vidstream">VidStream</button>
+    <button class="source-btn" data-source="upcloud">UpCloud</button>
+    <button class="source-btn" data-source="trailer">Trailer</button>
+</div>
 
 <div class="player-container">
     <iframe id="player" allowfullscreen></iframe>
 </div>
 
-<script src="js/auth.js"></script>
 <script src="js/player.js"></script>
-</body>
 </html>
+
 
