@@ -9,6 +9,26 @@ require("dotenv").config();
 
 const app = express();
 
+
+
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) return res.sendStatus(401);
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+        if (err) return res.sendStatus(403);
+        req.user = user;
+        next();
+    });
+}
+
+
+
+
+
+
 /* ================= SECURITY MIDDLEWARE ================= */
 
 app.use(
@@ -296,6 +316,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);
 });
+
 
 
 
