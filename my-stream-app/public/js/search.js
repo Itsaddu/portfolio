@@ -27,10 +27,13 @@ async function performSearch() {
     const query = document.getElementById("query").value.trim();
     const token = localStorage.getItem("authToken");
 
-    console.log("Searching for:", query);
-    console.log("Token:", token);
-
     if (!query) return;
+
+    if (!token) {
+        alert("Session expired. Please login again.");
+        window.location.href = "login.html";
+        return;
+    }
 
     try {
 
@@ -40,26 +43,30 @@ async function performSearch() {
             }
         });
 
-        console.log("Response status:", res.status);
-        console.log("Response headers:", [...res.headers]);
-
-        const text = await res.text();   // 🔥 get raw response first
-        console.log("Raw response:", text);
-
-        if (!res.ok) {
-            alert("Search failed: " + text);
+        // Handle auth errors
+        if (res.status === 401 || res.status === 403) {
+            alert("Session expired. Please login again.");
+            localStorage.removeItem("authToken");
+            window.location.href = "login.html";
             return;
         }
 
-        const data = JSON.parse(text);
-        displayResults(data.results);
+        if (!res.ok) {
+            const errorText = await res.text();
+            console.error("Server error:", errorText);
+            alert("Search failed. Please try again.");
+            return;
+        }
+
+        const data = await res.json();
+
+        displayResults(data?.results || []);
 
     } catch (err) {
         console.error("FULL ERROR:", err);
-        alert("Something went wrong");
+        alert("Network error. Please try again.");
     }
 }
-
 
 
 
@@ -68,26 +75,26 @@ function displayResults(results) {
     const container = document.getElementById("results");
     container.innerHTML = "";
 
-    if (!results || results.length === 0) {
+    if (!Array.isArray(results) || results.length === 0) {
         container.innerHTML = "<p>No results found</p>";
         return;
     }
 
     results.forEach(item => {
 
-        // ✅ Only allow movie or tv
-        if (item.media_type !== "movie" && item.media_type !== "tv") {
-            return;
-        }
+        // Only allow movie or tv
+        if (item.media_type !== "movie" && item.media_type !== "tv") return;
 
         if (!item.poster_path) return;
 
         const card = document.createElement("div");
         card.className = "card";
 
+        const title = item.title || item.name || "Untitled";
+
         card.innerHTML = `
-            <img src="https://image.tmdb.org/t/p/w500${item.poster_path}">
-            <p>${item.title || item.name}</p>
+            <img src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${title}">
+            <p>${title}</p>
         `;
 
         card.addEventListener("click", () => {
@@ -97,4 +104,5 @@ function displayResults(results) {
 
         container.appendChild(card);
     });
+
 }
