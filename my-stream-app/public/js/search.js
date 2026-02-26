@@ -60,6 +60,9 @@ async function performSearch() {
     }
 }
 
+
+
+
 function displayResults(results) {
 
     const container = document.getElementById("results");
@@ -71,6 +74,11 @@ function displayResults(results) {
     }
 
     results.forEach(item => {
+
+        // ✅ Only allow movie or tv
+        if (item.media_type !== "movie" && item.media_type !== "tv") {
+            return;
+        }
 
         if (!item.poster_path) return;
 
@@ -90,5 +98,3 @@ function displayResults(results) {
         container.appendChild(card);
     });
 }
-
-
