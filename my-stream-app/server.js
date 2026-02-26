@@ -248,6 +248,47 @@ app.get("/api/cast", verifyToken, async (req, res) => {
     }
 });
 
+
+
+
+// -------- GET YOUTUBE VIDEOS (TRAILER) --------
+app.get("/api/videos", authenticateToken, async (req, res) => {
+    const { id, type } = req.query;
+
+    try {
+        const response = await fetch(
+            `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${process.env.TMDB_API_KEY}`
+        );
+
+        const data = await response.json();
+        res.json(data);
+
+    } catch (err) {
+        res.status(500).json({ error: "Failed to fetch videos" });
+    }
+});
+
+// -------- GET IMDB ID --------
+app.get("/api/external", authenticateToken, async (req, res) => {
+    const { id, type } = req.query;
+
+    try {
+        const response = await fetch(
+            `https://api.themoviedb.org/3/${type}/${id}/external_ids?api_key=${process.env.TMDB_API_KEY}`
+        );
+
+        const data = await response.json();
+        res.json(data);
+
+    } catch (err) {
+        res.status(500).json({ error: "Failed to fetch external ids" });
+    }
+});
+
+
+
+
+
 /* ================= START SERVER ================= */
 
 const PORT = process.env.PORT || 3000;
@@ -255,6 +296,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);
 });
+
 
 
 
