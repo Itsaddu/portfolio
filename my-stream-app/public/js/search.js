@@ -1,3 +1,5 @@
+console.log("SEARCH.JS LOADED");
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const searchBtn = document.getElementById("searchBtn");
@@ -22,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+
 async function performSearch() {
 
     const query = document.getElementById("query").value.trim();
@@ -43,7 +46,7 @@ async function performSearch() {
             }
         });
 
-        // Handle auth errors
+        // If token expired
         if (res.status === 401 || res.status === 403) {
             alert("Session expired. Please login again.");
             localStorage.removeItem("authToken");
@@ -60,6 +63,9 @@ async function performSearch() {
 
         const data = await res.json();
 
+        console.log("DATA RECEIVED:", data);
+        console.log("IS ARRAY:", Array.isArray(data?.results));
+
         displayResults(data?.results || []);
 
     } catch (err) {
@@ -68,13 +74,6 @@ async function performSearch() {
     }
 }
 
-console.log("DATA RECEIVED:", data);
-console.log("IS ARRAY:", Array.isArray(data?.results));
-
-
-
-
-
 
 
 function displayResults(results) {
@@ -82,22 +81,27 @@ function displayResults(results) {
     const container = document.getElementById("results");
     container.innerHTML = "";
 
-    if (!Array.isArray(results) || results.length === 0) {
+    if (!Array.isArray(results)) {
+        console.error("Results is not array:", results);
+        container.innerHTML = "<p>Error loading results</p>";
+        return;
+    }
+
+    if (results.length === 0) {
         container.innerHTML = "<p>No results found</p>";
         return;
     }
 
     results.forEach(item => {
 
-        // Only allow movie or tv
+        if (!item) return;
         if (item.media_type !== "movie" && item.media_type !== "tv") return;
-
         if (!item.poster_path) return;
+
+        const title = item.title || item.name || "Untitled";
 
         const card = document.createElement("div");
         card.className = "card";
-
-        const title = item.title || item.name || "Untitled";
 
         card.innerHTML = `
             <img src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${title}">
@@ -113,4 +117,3 @@ function displayResults(results) {
     });
 
 }
-
