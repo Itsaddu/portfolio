@@ -176,3 +176,30 @@ iframe {
     font-size: 14px;
     margin-top: 5px;
 }
+
+
+
+
+
+.source-selector {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.source-btn {
+    padding: 8px 14px;
+    margin: 5px;
+    background: #222;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.source-btn:hover {
+    background: #444;
+}
+
+.active-source {
+    background: #00bcd4 !important;
+}
