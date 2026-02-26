@@ -4,56 +4,101 @@ const id = params.get("id");
 const type = params.get("type");
 const season = params.get("season") || 1;
 const episode = params.get("episode") || 1;
-const progress = params.get("progress");
 
-if (!id || !type) {
-    window.location.href = "home.html";
-}
+const iframe = document.getElementById("player");
+const buttons = document.querySelectorAll(".source-btn");
 
-/* ---------------- BUILD EMBED URL ---------------- */
+let currentSource = localStorage.getItem("selectedSource") || "vidking";
 
-let embedURL = "";
+document.addEventListener("DOMContentLoaded", () => {
+    activateSource(currentSource);
 
-if (type === "movie") {
-    embedURL = `https://www.vidking.net/embed/movie/${id}`;
-} else {
-    embedURL = `https://www.vidking.net/embed/tv/${id}/${season}/${episode}`;
-}
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const source = btn.dataset.source;
+            activateSource(source);
+        });
+    });
+});
 
-/* Add resume progress if exists */
-if (progress) {
-    embedURL += `?progress=${progress}`;
-}
+async function activateSource(source) {
+    currentSource = source;
+    localStorage.setItem("selectedSource", source);
 
-/* Load player */
-document.getElementById("player").src = embedURL;
+    buttons.forEach(btn =>
+        btn.classList.remove("active-source")
+    );
 
-/* ---------------- CONTINUE WATCHING SAVE ---------------- */
+    document.querySelector(`[data-source="${source}"]`)
+        .classList.add("active-source");
 
-window.addEventListener("message", function (event) {
-    if (typeof event.data === "string") {
-        try {
-            const parsed = JSON.parse(event.data);
+    let embedURL = "";
 
-            if (parsed.type === "PLAYER_EVENT") {
-
-                const currentTime = parsed.data.currentTime;
-
-                const saveData = {
-                    type: type,
-                    season: season,
-                    episode: episode,
-                    time: currentTime
-                };
-
-                localStorage.setItem(
-                    "continue_" + id,
-                    JSON.stringify(saveData)
-                );
-            }
-
-        } catch (e) {
-            // Ignore invalid messages
+    if (source === "vidking") {
+        if (type === "movie") {
+            embedURL = `https://www.vidking.net/embed/movie/${id}`;
+        } else {
+            embedURL = `https://www.vidking.net/embed/tv/${id}/${season}/${episode}`;
         }
     }
-});
+
+    if (source === "vidstream") {
+        if (type === "movie") {
+            embedURL = `https://vidstreaming.io/embed/tmdb/movie/${id}`;
+        } else {
+            embedURL = `https://vidstreaming.io/embed/tmdb/tv/${id}/${season}/${episode}`;
+        }
+    }
+
+    if (source === "upcloud") {
+        const imdb = await fetchIMDb();
+        if (!imdb) {
+            alert("IMDb ID not found.");
+            return;
+        }
+
+        embedURL = `https://upcloudstream.com/embed/${imdb}`;
+    }
+
+    if (source === "trailer") {
+        const trailerKey = await fetchTrailer();
+        if (!trailerKey) {
+            alert("Trailer not available.");
+            return;
+        }
+        embedURL = `https://www.youtube.com/embed/${trailerKey}`;
+    }
+
+    iframe.src = embedURL;
+}
+
+/* -------- FETCH IMDB ID FOR UPCLOUD -------- */
+
+async function fetchIMDb() {
+    const token = localStorage.getItem("authToken");
+
+    const res = await fetch(`/api/external?id=${id}&type=${type}`, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+
+    const data = await res.json();
+    return data.imdb_id;
+}
+
+/* -------- FETCH TRAILER KEY -------- */
+
+async function fetchTrailer() {
+    const token = localStorage.getItem("authToken");
+
+    const res = await fetch(`/api/videos?id=${id}&type=${type}`, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+
+    const data = await res.json();
+
+    const trailer = data.results.find(
+        v => v.type === "Trailer" && v.site === "YouTube"
+    );
+
+    return trailer?.key;
+}
