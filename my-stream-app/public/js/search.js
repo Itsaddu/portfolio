@@ -68,6 +68,13 @@ async function performSearch() {
     }
 }
 
+console.log("DATA RECEIVED:", data);
+console.log("IS ARRAY:", Array.isArray(data?.results));
+
+
+
+
+
 
 
 function displayResults(results) {
@@ -106,3 +113,4 @@ function displayResults(results) {
     });
 
 }
+
